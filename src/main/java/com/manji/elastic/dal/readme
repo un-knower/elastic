@@ -1,0 +1,3 @@
+dao层
+com.bola.elastic.dal.mybatis.mapper dao层mapper 自动生成
+com.bola.elastic.dal.mybatis.model 数据库表相应实体类 自动生成

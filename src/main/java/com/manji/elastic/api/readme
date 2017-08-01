@@ -1,0 +1,9 @@
+bola 公司名  elastic 项目名称  
+com.bola.elastic.api 接口有关的包 
+com.bola.elastic.api.controller  接口的controller //不同的大模块，建立相应的包在里面写Controller类
+不要把所有接口写一个类里面
+比如
+com.bola.elastic.api.controller.commodity.CommodityApiController.java
+com.bola.elastic.api.controller.user.UserApiController.java
+
+

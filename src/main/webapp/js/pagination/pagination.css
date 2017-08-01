@@ -1,0 +1,122 @@
+@charset "utf-8";
+/* CSS Document */
+/***
+ */
+.mt10 {
+    margin-top: 1px;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+.cb {
+    clear: both;
+}
+.fr {
+    float: right;
+}
+ul.pagination {
+    padding: 0px;
+    overflow: hidden;
+    font: 12px 'Tahoma';
+    list-style-type: none;
+}
+
+ul.pagination li {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 5px;
+}
+
+ul.pagination li:first-child {
+    margin-left: 0px;
+}
+
+ul.pagination li input[type='text'] {
+    padding: 0 5px;
+}
+
+ul.pagination li a {
+    color: black;
+    display: block;
+    text-decoration: none;
+    padding: 7px 10px 7px 10px;
+}
+
+
+ul.pagination li.tz span, ul.pagination li.tz a, ul.pagination li.tz input {
+    float: left;
+    display: inline-block;
+}
+
+ul.pagination li.tz span {
+    padding:8px 1px 6px 9px;
+    background-color:transparent;
+    border:0px;
+    color:black;
+}
+
+ul.pagination li.tz input {
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 31px;
+    width: 45px;
+    border:1px solid #cccccc;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+}
+
+ul.pagination li a img {
+    border: none;
+}
+
+ul.paginationB li a {
+    border: solid 1px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 6px 9px 6px 9px;
+}
+
+ul.paginationB li {
+    padding-bottom: 1px;
+}
+
+ul.paginationB li a:hover, ul.paginationB li a.current {
+    color: #FFFFFF;
+    box-shadow: 0px 1px #EDEDED;
+    -moz-box-shadow: 0px 1px #EDEDED;
+    -webkit-box-shadow: 0px 1px #EDEDED;
+}
+
+/*****************************************************************/
+/* 02																				  */
+/*****************************************************************/
+
+ul.paginationB02 li a {
+    color: #333;
+    border-color: #ddd;
+    background: #F8FCFF;
+}
+
+ul.paginationB02 li a:hover, ul.paginationB02 li a.current {
+    border-color: #028ccf;
+    background: #0098e1;
+    background: -moz-linear-gradient(top, #B4F6FF 1px, #63D0FE 1px, #028ccf);
+    background: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.02, #B4F6FF), color-stop(0.02, #63D0FE), color-stop(1, #58B0E7));
+}
+ul.paginationB02 li a.disable {
+    color: #333;
+    border-color: #ddd;
+    background: rgb(238,238,238);
+    cursor:not-allowed;
+}
+
+.yuan{
+	border-radius:3px;
+	border:1px solid #cccccc;
+	height: 28px;
+}
+.hand{
+	cursor: pointer;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+       <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd"
+       default-autowire="byName">
+    <context:annotation-config/>
+    <!-- 扫描指定的包中的类上的注解 -->
+    <context:component-scan base-package="com.manji.elastic.web" />
+    <context:component-scan base-package="com.manji.elastic.api"/>
+    
+  	<mvc:annotation-driven>  
+ 	<!--处理responseBody  和 里面日期类型  处理返回时间为时间戳的问题 -->
+        <mvc:message-converters>  
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+                <property name="objectMapper">  
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">  
+                        <property name="dateFormat">  
+                            <bean class="java.text.SimpleDateFormat">  
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />  
+                            </bean>  
+                        </property>  
+                    </bean>
+                </property>  
+            </bean>  
+        </mvc:message-converters>  
+    </mvc:annotation-driven>
+	
+	<!-- 支持上传文件 -->  
+    <!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="maxUploadSize" value="50000000"/>
+    </bean>  
+    <!-- 对静态资源文件的访问 -->      
+    <mvc:resources mapping="/elastic/**" location="/elastic/"/>   
+	<mvc:resources mapping="/images/**" location="/images/"/>   
+	<mvc:resources mapping="/fonts/**" location="/fonts/"/>   
+	<mvc:resources mapping="/js/**" location="/js/"/>  
+	<mvc:resources mapping="/css/**" location="/css/"/>  
+	<mvc:resources mapping="/style/**" location="/style/"/>  
+	<mvc:resources mapping="/upload/**" location="/upload/"/>  
+	<mvc:resources mapping="/swf/**" location="/swf/"/>  
+	<mvc:resources mapping="/resources/**" location="/resources/" order="0"/>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp">
+    </bean>
+
+</beans>
