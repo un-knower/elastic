@@ -17,7 +17,7 @@ public class AppArticleQuery {
 	private String area_code ="";//地区码。
 	private int sale_flag =0;///折扣类型，01
 	private int price_start =0; //筛选初始金额
-	private int price_end  ;//筛选结束金额 ，默认不传。
+	private int price_end = 1000000000;//筛选结束金额 ，默认不传。
 	private int shop_id =0; //商家ID
 	//包邮特殊逻辑
 	private int ship_flag =0;//是否包邮，默认为0，1为包邮
