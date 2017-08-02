@@ -17,6 +17,7 @@ public final class Configure {
 	private static final String EsUrl = "EsUrl";
 	private static final String EsLocation = "EsLocation";
 	private static final String BASIC_PORT="BASIC_PORT";
+	private static final String ESscoke_PORT="ESscoke_PORT";
 	private static final String ES_NAME="ES_NAME";
 	private static final String ES_PASSWORD="ES_PASSWORD";
 	
@@ -60,6 +61,9 @@ public final class Configure {
 	}
 	public static String getBASIC_PORT() {
 		return PropertiesUtil.getValue(BASIC_PORT);
+	}
+	public static String getESscoke_PORT() {
+		return PropertiesUtil.getValue(ESscoke_PORT);
 	}
 	public static String getES_NAME() {
 		return PropertiesUtil.getValue(ES_NAME);
