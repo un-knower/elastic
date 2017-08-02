@@ -107,6 +107,8 @@ public class V1APPArticleApiController {
 			sb.append("}");
 			// 分页
 			sb.append(",\"size\": " + query.getSize() + ",\"from\": " + from + "}}");
+			System.out.println(sb.toString().replace("must\": [,", "must\": ["));
+			
 			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
 			JSONObject jsonObj = JSON.parseObject(esReturn);  
 			JSONObject result = (JSONObject) jsonObj.get("hits");
