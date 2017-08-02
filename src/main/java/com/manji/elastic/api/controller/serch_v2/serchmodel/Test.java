@@ -36,8 +36,22 @@ public class Test {
 		mm.setQuery(query);
 		
 		//排序
+		int a = 1;
 		Map<String,String> shortMap = new HashMap<String,String>();
-		shortMap.put("article_review_score", "desc");
+		switch (a) {
+		case 1:
+			shortMap.put("article_order_times", "desc");
+			break;
+		case 2:
+			shortMap.put("article_sell_price", "asc");
+			break;
+		case 3:
+			shortMap.put("article_sell_price", "desc");
+			break;
+		default:
+			shortMap.put("article_review_score", "desc");
+			break;
+		}
 		mm.setSort(shortMap);
 		
 		System.out.println(JSON.toJSONString(mm));
