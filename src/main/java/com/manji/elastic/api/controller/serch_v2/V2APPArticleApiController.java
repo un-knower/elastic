@@ -262,7 +262,7 @@ public class V2APPArticleApiController {
 	 */
 	@ResponseBody
 	@ApiOperation(value = "商家类查询", notes = "商家类查询")
-	@RequestMapping(value="/articleOfShop", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value="/articleOfShop", method = {RequestMethod.GET}, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public BaseObjectResult<SearchHits> articleOfShop(HttpServletRequest req,@RequestParam(required = false) Integer size,
 			@RequestParam(required = false) Integer pageNum,@RequestParam(required = false) String queryStr,
 			@RequestParam(required = false) String cate_id,@RequestParam(required = false) String shop_cate_id,
@@ -361,7 +361,7 @@ public class V2APPArticleApiController {
 	 */
 	@ResponseBody
 	@ApiOperation(value = "商家商品綜合查詢", notes = "商家商品綜合查詢")
-	@RequestMapping(value="/shopArticle", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value="/shopArticle", method = {RequestMethod.GET}, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Object shopArticle(HttpServletRequest req,@RequestParam(required = false) Integer size,
 			@RequestParam(required = false) Integer pageNum,@RequestParam(required = false) String queryStr,
 			@RequestParam(required = false) String shop_cate_id,@RequestParam(required = false) Integer shop_id,
