@@ -102,7 +102,7 @@ public class V1APPShopApiController {
 			StringBuffer tempSb =sb;
 			sb.append(",\"size\": " + query.getSize() + ",\"from\": " + from + "}");
 			
-			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
+			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"shop"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
 			
 			JSONObject obj = JSONObject.parseObject(esReturn);
 			JSONObject returnObj = obj.getJSONObject("hits");

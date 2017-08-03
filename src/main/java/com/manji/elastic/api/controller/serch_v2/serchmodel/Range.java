@@ -3,14 +3,13 @@ package com.manji.elastic.api.controller.serch_v2.serchmodel;
 import java.util.Map;
 
 public class Range {
-	private Map<String,GtLt> s;
+	private Map<String,GtLt> range;
 
-	public Map<String, GtLt> getS() {
-		return s;
+	public Map<String, GtLt> getRange() {
+		return range;
 	}
 
-	public void setS(Map<String, GtLt> s) {
-		this.s = s;
+	public void setRange(Map<String, GtLt> range) {
+		this.range = range;
 	}
-	
 }

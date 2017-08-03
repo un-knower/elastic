@@ -15,22 +15,29 @@ public class Test {
 		mm.setSize(20);
 		mm.setFrom(2);
 		
-		//Query
+		//Query Bool
 		Query query = new Query();
 		Bool bool = new Bool();
 		
-		//must
+		//must 参数不为空时相应字段and
 		Map<String,String> mustpartemMap = new HashMap<String,String>();
-		mustpartemMap.put("article_category_index", "你好啊");
-		mustpartemMap.put("article_index", "我不后啊");
+		mustpartemMap.put("article_category_index", "");
+		mustpartemMap.put("article_index", "");
 		mustpartemMap.put("342r", "");
 		List<Match> musts = setAndMust(mustpartemMap);
-		if(musts.size() > 0){
-			bool.setMust(musts);
-		}
+		bool.setMust(musts);
 		
 		//filter
-		
+		List<Range> filter = new ArrayList<Range>();
+		Range range = new Range();
+		Map<String,GtLt> rangeMap = new HashMap<String,GtLt>();
+		GtLt gtlt = new GtLt();
+		gtlt.setGte("0");
+		gtlt.setLte("999");
+		rangeMap.put("article_sell_price", gtlt);
+		range.setRange(rangeMap);
+		filter.add(range);
+		bool.setFilter(filter);
 		
 		query.setBool(bool);
 		mm.setQuery(query);

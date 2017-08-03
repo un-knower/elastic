@@ -16,10 +16,14 @@ public final class Configure {
 	//ES连接参数配置
 	private static final String EsUrl = "EsUrl";
 	private static final String EsLocation = "EsLocation";
-	private static final String BASIC_PORT="BASIC_PORT";
-	private static final String ESscoke_PORT="ESscoke_PORT";
-	private static final String ES_NAME="ES_NAME";
-	private static final String ES_PASSWORD="ES_PASSWORD";
+	private static final String BASIC_PORT = "BASIC_PORT";
+	private static final String ESscoke_PORT = "ESscoke_PORT";
+	private static final String ES_NAME = "ES_NAME";
+	private static final String ES_PASSWORD = "ES_PASSWORD";
+	private static final String ES_sp_IndexAlias  = "ES_sp_IndexAlias";
+	private static final String ES_shop_IndexAlias  = "ES_shop_IndexAlias";
+	private static final String ES_shop_hot_IndexAlias  = "ES_shop_hot_IndexAlias";
+	private static final String ES_shop_extra_IndexAlias  = "ES_shop_extra_IndexAlias";
 	
 	static {
 		String profiles = System.getProperty("spring.profiles.active", "dev");
@@ -70,5 +74,17 @@ public final class Configure {
 	}
 	public static String getES_PASSWORD() {
 		return PropertiesUtil.getValue(ES_PASSWORD);
+	}
+	public static String getES_sp_IndexAlias() {
+		return PropertiesUtil.getValue(ES_sp_IndexAlias);
+	}
+	public static String getES_shop_IndexAlias() {
+		return PropertiesUtil.getValue(ES_shop_IndexAlias);
+	}
+	public static String getES_shop_hot_IndexAlias() {
+		return PropertiesUtil.getValue(ES_shop_hot_IndexAlias);
+	}
+	public static String getES_shop_extra_IndexAlias() {
+		return PropertiesUtil.getValue(ES_shop_extra_IndexAlias);
 	}
 }

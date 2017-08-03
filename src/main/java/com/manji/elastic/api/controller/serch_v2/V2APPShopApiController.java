@@ -5,6 +5,20 @@ import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.geo.GeoDistance;
+import org.elasticsearch.common.unit.DistanceUnit;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.sort.GeoDistanceSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -12,25 +26,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.manji.elastic.api.controller.serch_v1.requestModel.app.AppShopQuery;
+import com.manji.elastic.common.exception.BusinessDealException;
 import com.manji.elastic.common.global.Configure;
+import com.manji.elastic.common.result.BaseObjectResult;
+import com.manji.elastic.common.util.ElasticsearchClientUtils;
 import com.manji.elastic.common.util.HttpClientUtil;
+import com.manji.elastic.dal.enums.CodeEnum;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 /**
- * 一期接口，这里保留
+ * 二期接口，这里保留
  * APP商家
  * @author Administrator
  *
  */
 @Controller
-@Api(value = "/app-Shop", description = "一期接口，APP商家")
+@Api(value = "/app-Shopv2", description = "二期接口，APP商家")
 @RequestMapping("/app/shop/v2")
 public class V2APPShopApiController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -41,112 +59,115 @@ public class V2APPShopApiController {
 	 */
 	@ResponseBody
 	@ApiOperation(value = "商家综合查询", notes = "商家综合查询")
-	@RequestMapping(value="/queryShop", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Object queryShop(HttpServletRequest req,@RequestBody AppShopQuery query){
+	@RequestMapping(value="/queryShop", method = {RequestMethod.GET}, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public Object queryShop(HttpServletRequest req,@RequestParam(required = false) Integer size,
+			@RequestParam(required = false) Integer pageNum,@RequestParam(required = false) String queryStr,
+			@RequestParam(required = false) String location,@RequestParam(required = false) Integer distance_max,
+			@RequestParam(required = false) String cate_id,@RequestParam(required = false) String busy_id,
+			@RequestParam(required = false) String area_code,@RequestParam(required = false) Integer sign_flag,
+			@RequestParam(required = false) Integer open_flag,@RequestParam(required = false) Integer sort_flag
+			){
+		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
-			// 获取传入的地理位置
-			String location = query.getLocation();
+			if(null == pageNum){
+				pageNum = 1;
+			}
+			if(null == size){
+				size = 20;
+			}
+			if(null == distance_max){
+				distance_max = 1000;
+			}
+			if(null == sort_flag){
+				sort_flag = 0;
+			}
 			String lat = "";
 			String lon = "";
-			if ("" != location) {
-				lat = location.split(",")[0];
-				lon = location.split(",")[1];
-			} else {
-				return "{\"data\":\"地理位置未传\"}";
+			if(StringUtils.isBlank(location)){
+				throw new BusinessDealException("获取位置信息失败~~~");
 			}
-			int from = (query.getPageNum() - 1) * query.getSize();
-			int end =query.getPageNum()* query.getSize();
-			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
-			// 关键字
-			if (!"".equals(query.getQueryStr())) {
-				sb.append("{ \"match\": { \"shopinfo_index\": \"" + query.getQueryStr() + "\" } }");
+			lat = location.split(",")[0];
+			lon = location.split(",")[1];
+			int end = pageNum * size;
+			//连接服务端
+			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
+			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
+			//关键字
+			if(StringUtils.isNotBlank(queryStr)){
+				qb1.must(QueryBuilders.matchQuery("shopinfo_index",queryStr));
 			}
 			// 商家主营分类
-			if (!"".equals(query.getBusy_id())) {
-				sb.append(",{ \"match\": { \"main_business\": \"" + query.getBusy_id() + "\" } }");
+			if(StringUtils.isNotBlank(busy_id)){
+				qb1.must(QueryBuilders.matchQuery("main_business",busy_id));
 			}
-			// 商家分类
-			if (!"".equals(query.getCate_id())) {
-				sb.append(",{ \"match\": { \"scope_values\": \"" + query.getCate_id() + "\" } }");
+			//商家分类
+			if(StringUtils.isNotBlank(cate_id)){
+				qb1.must(QueryBuilders.matchQuery("scope_values",cate_id));
 			}
-			// 是否签约
-			if (0 != query.getSign_flag()) {
-				sb.append(",{ \"match\": { \"is_sign_up\": \"" + query.getSign_flag() + "\" } }");
+			//是否签约
+			if(null != sign_flag){
+				qb1.must(QueryBuilders.matchQuery("is_sign_up",sign_flag));
 			}
-			if(1 ==query.getOpen_flag()){
-				sb.append(",{ \"match\": { \"dpkg\": \"" + 1 + "\" } }");
+			//是否开通
+			if(null != open_flag){
+				qb1.must(QueryBuilders.matchQuery("dpkg",open_flag));
 			}
-			// 区域
-			if (!"".equals(query.getArea_code())&&query.getArea_code() !=null) {
-				sb.append(",{\"match\": { \"area_code\": \"" + query.getArea_code() + "\" } }");
+			//区域
+			if(StringUtils.isNotBlank(area_code)){
+				qb1.must(QueryBuilders.matchQuery("area_code",area_code));
 			}
-			sb.append("]");
-			// 搜索附近最大区域
-			if (0 == query.getDistance_max()) {
-				sb.append(",\"filter\":{\"geo_distance\":{\"distance\":\"1000m\",\"latlng\":{\"lat\":" + lat + ",\"lon\":"
-						+ lon + "}}}");
-			} else {
-				sb.append(",\"filter\":{\"geo_distance\":{\"distance\":\"" + query.getDistance_max()
-						+ "m\",\"latlng\":{\"lat\":" + lat + ",\"lon\":" + lon + "}}}");
-			}
-			sb.append("}}");
-			// 排序方式
-			if (0 == query.getSort_flag()) {
-				sb.append(",\"sort\":{\"_geo_distance\":{\"latlng\":{\"lat\":\"" + lat + "\",\"lon\":\"" + lon
-						+ "\"},\"order\": \"asc\",\"unit\":\"m\"}}");
-			} else {
-				// service_review_score
-				sb.append(",\"sort\":{\"review_score\":\"desc\",\"_geo_distance\":{\"latlng\":{\"lat\":\"" + lat + "\",\"lon\":\"" + lon
-						+ "\"},\"order\": \"asc\",\"unit\":\"m\"}}");
-			}
-			StringBuffer tempSb =sb;
-			sb.append(",\"size\": " + query.getSize() + ",\"from\": " + from + "}");
+			//搜索附近区域
+			QueryBuilder builder = QueryBuilders.geoDistanceRangeQuery("latlng", Double.valueOf(lat), Double.valueOf(lon))
+				.from("0m")
+				.to(distance_max + "m")
+				.includeLower(true)
+				.includeUpper(false)
+				.geoDistance(GeoDistance.ARC);
+			qb1.filter(builder);
 			
-			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
+			//排序方式
+			GeoDistanceSortBuilder sort = new GeoDistanceSortBuilder("latlng", Double.valueOf(lat), Double.valueOf(lon));
+			sort.unit(DistanceUnit.METERS);//距离单位米  
+			sort.order(SortOrder.ASC); 
 			
-			JSONObject obj = JSONObject.parseObject(esReturn);
-			JSONObject returnObj = obj.getJSONObject("hits");
-			//签约商家查询完毕
-			int signCount =returnObj.getIntValue("total");
-			//签约商家数量不足
-			if(end >signCount){
-				if(end -signCount<query.getSize()){
-					JSONArray hits =returnObj.getJSONArray("hits");
-					int hitsCount =0;
-					if(null !=hits){
-						hitsCount =hits.size();
-					}
-					int deCount =query.getSize() -hitsCount;
-					tempSb.append(",\"size\": " + deCount + ",\"from\": " + 0 + "}");
-					String tempEsReturn = loaderExtra(tempSb);
-					JSONObject tempObj = JSONObject.parseObject(tempEsReturn);
-					JSONObject tempReturnObj = tempObj.getJSONObject("hits");
-					JSONArray extraHits =tempReturnObj.getJSONArray("hits");
-					for(int i =0;i<extraHits.size();i++){
-						JSONObject extraObj =extraHits.getJSONObject(i);
-						returnObj.getJSONArray("hits").add(i+hitsCount, extraObj);
-					}
-				}else{
-					int extraStart =end -signCount-query.getSize();
-					tempSb.append(",\"size\": " + query.getSize() + ",\"from\": " + extraStart + "}");
-					String tempEsReturn = loaderExtra(tempSb);
-					JSONObject tempObj = JSONObject.parseObject(tempEsReturn);
-					JSONObject tempReturnObj = tempObj.getJSONObject("hits");
-					returnObj =tempReturnObj;
-				}
+			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_shop_IndexAlias());
+			requestBuider.setTypes("info");
+			
+			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
+			requestBuider.setQuery(qb1);
+			
+			//距离排序
+			if(sort_flag == 0){
+				requestBuider.addSort(sort);
 			}
-			//返回信息
-	        return returnObj;
+			//评分和距离综合排序
+			if(sort_flag == 1){
+				requestBuider.addSort(SortBuilders.fieldSort("review_score").order(SortOrder.DESC));
+				requestBuider.addSort(sort);
+			}
+			requestBuider.setFrom((pageNum - 1) * size);
+			requestBuider.setSize(size);
+			logger.info("参数json:{}",requestBuider.toString());
+			//执行查询结果
+			SearchResponse searchResponse = requestBuider.get();
+			SearchHits hits = searchResponse.getHits();
+			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
+				throw new BusinessDealException("抱歉，没有找到“关键词”的搜索结果");
+			}
+			baseResult.setResult(hits);
+		}catch (BusinessDealException e) {
+			logger.error("业务处理异常， 错误信息：{}", e.getMessage());
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.BUSSINESS_HANDLE_ERROR.getCode(), e.getMessage());
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("系统异常，{}", e.getMessage());
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw, true));
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.SYSTEM_ERROR.getCode(), "系统异常" , sw.toString());
 		}
-		return null;
+		return baseResult;
 	}
-	
-	
 	/**
 	 * 推荐商家
 	 * @param req
