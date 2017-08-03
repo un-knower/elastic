@@ -203,10 +203,14 @@ public class V2APPArticleApiController {
 			}
 			//查询当前商品是什么分类的
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
-			SearchResponse searchResponse = client.prepareSearch(Configure.getES_sp_IndexAlias())
-				.setTypes("info")
-				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-				.setQuery(QueryBuilders.termQuery("article_category_index", goods_id)).get();
+			SearchRequestBuilder requestBuder = client.prepareSearch(Configure.getES_sp_IndexAlias());
+			requestBuder.setTypes("info");
+			requestBuder.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
+			if(StringUtils.isBlank(goods_id)){
+				throw new BusinessDealException("我不晓得你要查询什么类的了~~~");
+			}
+			requestBuder.setQuery(QueryBuilders.termQuery("article_category_index", goods_id));
+			SearchResponse searchResponse = requestBuder.get();
 			SearchHits hits = searchResponse.getHits();
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new BusinessDealException("抱歉，没有找到“关键词”的搜索结果");

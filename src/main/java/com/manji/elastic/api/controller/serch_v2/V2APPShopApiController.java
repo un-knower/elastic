@@ -183,6 +183,9 @@ public class V2APPShopApiController {
 			}if(null == sort_flag){
 				sort_flag = 0;
 			}
+			if(StringUtils.isBlank(area_code)){
+				throw new BusinessDealException("推荐区域码未传");
+			}
 			int len = area_code.length();
 			String areaCode = "";
 			if (len == 0) {
