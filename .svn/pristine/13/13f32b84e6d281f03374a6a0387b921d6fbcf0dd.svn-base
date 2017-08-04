@@ -1,0 +1,3666 @@
+[
+  {
+    "id": 110101,
+    "pId": 110000,
+    "name": "东城区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110102,
+    "pId": 110000,
+    "name": "西城区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110105,
+    "pId": 110000,
+    "name": "朝阳区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110106,
+    "pId": 110000,
+    "name": "丰台区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110107,
+    "pId": 110000,
+    "name": "石景山区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110108,
+    "pId": 110000,
+    "name": "海淀区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110109,
+    "pId": 110000,
+    "name": "门头沟区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110111,
+    "pId": 110000,
+    "name": "房山区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110112,
+    "pId": 110000,
+    "name": "通州区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110113,
+    "pId": 110000,
+    "name": "顺义区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110114,
+    "pId": 110000,
+    "name": "昌平区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110115,
+    "pId": 110000,
+    "name": "大兴区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110116,
+    "pId": 110000,
+    "name": "怀柔区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110117,
+    "pId": 110000,
+    "name": "平谷区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110228,
+    "pId": 110000,
+    "name": "密云县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110229,
+    "pId": 110000,
+    "name": "延庆县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120101,
+    "pId": 120000,
+    "name": "和平区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120102,
+    "pId": 120000,
+    "name": "河东区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120103,
+    "pId": 120000,
+    "name": "河西区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120104,
+    "pId": 120000,
+    "name": "南开区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120105,
+    "pId": 120000,
+    "name": "河北区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120106,
+    "pId": 120000,
+    "name": "红桥区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120110,
+    "pId": 120000,
+    "name": "东丽区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120111,
+    "pId": 120000,
+    "name": "西青区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120112,
+    "pId": 120000,
+    "name": "津南区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120113,
+    "pId": 120000,
+    "name": "北辰区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120114,
+    "pId": 120000,
+    "name": "武清区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120115,
+    "pId": 120000,
+    "name": "宝坻区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120116,
+    "pId": 120000,
+    "name": "滨海新区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120221,
+    "pId": 120000,
+    "name": "宁河县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120223,
+    "pId": 120000,
+    "name": "静海县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 120225,
+    "pId": 120000,
+    "name": "蓟县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130100,
+    "pId": 130000,
+    "name": "石家庄市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130200,
+    "pId": 130000,
+    "name": "唐山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130300,
+    "pId": 130000,
+    "name": "秦皇岛市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130400,
+    "pId": 130000,
+    "name": "邯郸市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130500,
+    "pId": 130000,
+    "name": "邢台市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130600,
+    "pId": 130000,
+    "name": "保定市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130700,
+    "pId": 130000,
+    "name": "张家口市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130800,
+    "pId": 130000,
+    "name": "承德市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 130900,
+    "pId": 130000,
+    "name": "沧州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 131000,
+    "pId": 130000,
+    "name": "廊坊市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 131100,
+    "pId": 130000,
+    "name": "衡水市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140100,
+    "pId": 140000,
+    "name": "太原市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140200,
+    "pId": 140000,
+    "name": "大同市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140300,
+    "pId": 140000,
+    "name": "阳泉市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140400,
+    "pId": 140000,
+    "name": "长治市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140500,
+    "pId": 140000,
+    "name": "晋城市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140600,
+    "pId": 140000,
+    "name": "朔州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140700,
+    "pId": 140000,
+    "name": "晋中市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140800,
+    "pId": 140000,
+    "name": "运城市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 140900,
+    "pId": 140000,
+    "name": "忻州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 141000,
+    "pId": 140000,
+    "name": "临汾市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 141100,
+    "pId": 140000,
+    "name": "吕梁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150100,
+    "pId": 150000,
+    "name": "呼和浩特市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150200,
+    "pId": 150000,
+    "name": "包头市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150300,
+    "pId": 150000,
+    "name": "乌海市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150400,
+    "pId": 150000,
+    "name": "赤峰市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150500,
+    "pId": 150000,
+    "name": "通辽市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150600,
+    "pId": 150000,
+    "name": "鄂尔多斯市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150700,
+    "pId": 150000,
+    "name": "呼伦贝尔市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150800,
+    "pId": 150000,
+    "name": "巴彦淖尔市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 150900,
+    "pId": 150000,
+    "name": "乌兰察布市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 152200,
+    "pId": 150000,
+    "name": "兴安盟",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 152500,
+    "pId": 150000,
+    "name": "锡林郭勒盟",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 152900,
+    "pId": 150000,
+    "name": "阿拉善盟",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210100,
+    "pId": 210000,
+    "name": "沈阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210200,
+    "pId": 210000,
+    "name": "大连市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210300,
+    "pId": 210000,
+    "name": "鞍山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210400,
+    "pId": 210000,
+    "name": "抚顺市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210500,
+    "pId": 210000,
+    "name": "本溪市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210600,
+    "pId": 210000,
+    "name": "丹东市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210700,
+    "pId": 210000,
+    "name": "锦州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210800,
+    "pId": 210000,
+    "name": "营口市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 210900,
+    "pId": 210000,
+    "name": "阜新市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 211000,
+    "pId": 210000,
+    "name": "辽阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 211100,
+    "pId": 210000,
+    "name": "盘锦市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 211200,
+    "pId": 210000,
+    "name": "铁岭市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 211300,
+    "pId": 210000,
+    "name": "朝阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 211400,
+    "pId": 210000,
+    "name": "葫芦岛市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220100,
+    "pId": 220000,
+    "name": "长春市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220200,
+    "pId": 220000,
+    "name": "吉林市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220300,
+    "pId": 220000,
+    "name": "四平市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220400,
+    "pId": 220000,
+    "name": "辽源市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220500,
+    "pId": 220000,
+    "name": "通化市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220600,
+    "pId": 220000,
+    "name": "白山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220700,
+    "pId": 220000,
+    "name": "松原市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 220800,
+    "pId": 220000,
+    "name": "白城市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 222400,
+    "pId": 220000,
+    "name": "延边朝鲜族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230100,
+    "pId": 230000,
+    "name": "哈尔滨市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230200,
+    "pId": 230000,
+    "name": "齐齐哈尔市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230300,
+    "pId": 230000,
+    "name": "鸡西市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230400,
+    "pId": 230000,
+    "name": "鹤岗市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230500,
+    "pId": 230000,
+    "name": "双鸭山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230600,
+    "pId": 230000,
+    "name": "大庆市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230700,
+    "pId": 230000,
+    "name": "伊春市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230800,
+    "pId": 230000,
+    "name": "佳木斯市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 230900,
+    "pId": 230000,
+    "name": "七台河市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 231000,
+    "pId": 230000,
+    "name": "牡丹江市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 231100,
+    "pId": 230000,
+    "name": "黑河市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 231200,
+    "pId": 230000,
+    "name": "绥化市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 232700,
+    "pId": 230000,
+    "name": "大兴安岭地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310101,
+    "pId": 310000,
+    "name": "黄浦区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310104,
+    "pId": 310000,
+    "name": "徐汇区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310105,
+    "pId": 310000,
+    "name": "长宁区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310106,
+    "pId": 310000,
+    "name": "静安区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310107,
+    "pId": 310000,
+    "name": "普陀区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310108,
+    "pId": 310000,
+    "name": "闸北区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310109,
+    "pId": 310000,
+    "name": "虹口区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310110,
+    "pId": 310000,
+    "name": "杨浦区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310112,
+    "pId": 310000,
+    "name": "闵行区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310113,
+    "pId": 310000,
+    "name": "宝山区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310114,
+    "pId": 310000,
+    "name": "嘉定区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310115,
+    "pId": 310000,
+    "name": "浦东新区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310116,
+    "pId": 310000,
+    "name": "金山区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310117,
+    "pId": 310000,
+    "name": "松江区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310118,
+    "pId": 310000,
+    "name": "青浦区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310120,
+    "pId": 310000,
+    "name": "奉贤区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 310230,
+    "pId": 310000,
+    "name": "崇明县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320100,
+    "pId": 320000,
+    "name": "南京市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320200,
+    "pId": 320000,
+    "name": "无锡市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320300,
+    "pId": 320000,
+    "name": "徐州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320400,
+    "pId": 320000,
+    "name": "常州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320500,
+    "pId": 320000,
+    "name": "苏州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320600,
+    "pId": 320000,
+    "name": "南通市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320700,
+    "pId": 320000,
+    "name": "连云港市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320800,
+    "pId": 320000,
+    "name": "淮安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 320900,
+    "pId": 320000,
+    "name": "盐城市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 321000,
+    "pId": 320000,
+    "name": "扬州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 321100,
+    "pId": 320000,
+    "name": "镇江市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 321200,
+    "pId": 320000,
+    "name": "泰州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 321300,
+    "pId": 320000,
+    "name": "宿迁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330100,
+    "pId": 330000,
+    "name": "杭州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330200,
+    "pId": 330000,
+    "name": "宁波市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330300,
+    "pId": 330000,
+    "name": "温州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330400,
+    "pId": 330000,
+    "name": "嘉兴市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330500,
+    "pId": 330000,
+    "name": "湖州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330600,
+    "pId": 330000,
+    "name": "绍兴市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330700,
+    "pId": 330000,
+    "name": "金华市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330800,
+    "pId": 330000,
+    "name": "衢州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 330900,
+    "pId": 330000,
+    "name": "舟山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 331000,
+    "pId": 330000,
+    "name": "台州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 331100,
+    "pId": 330000,
+    "name": "丽水市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340100,
+    "pId": 340000,
+    "name": "合肥市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340200,
+    "pId": 340000,
+    "name": "芜湖市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340300,
+    "pId": 340000,
+    "name": "蚌埠市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340400,
+    "pId": 340000,
+    "name": "淮南市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340500,
+    "pId": 340000,
+    "name": "马鞍山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340600,
+    "pId": 340000,
+    "name": "淮北市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340700,
+    "pId": 340000,
+    "name": "铜陵市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 340800,
+    "pId": 340000,
+    "name": "安庆市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341000,
+    "pId": 340000,
+    "name": "黄山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341100,
+    "pId": 340000,
+    "name": "滁州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341200,
+    "pId": 340000,
+    "name": "阜阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341300,
+    "pId": 340000,
+    "name": "宿州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341500,
+    "pId": 340000,
+    "name": "六安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341600,
+    "pId": 340000,
+    "name": "亳州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341700,
+    "pId": 340000,
+    "name": "池州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 341800,
+    "pId": 340000,
+    "name": "宣城市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350100,
+    "pId": 350000,
+    "name": "福州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350200,
+    "pId": 350000,
+    "name": "厦门市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350300,
+    "pId": 350000,
+    "name": "莆田市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350400,
+    "pId": 350000,
+    "name": "三明市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350500,
+    "pId": 350000,
+    "name": "泉州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350600,
+    "pId": 350000,
+    "name": "漳州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350700,
+    "pId": 350000,
+    "name": "南平市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350800,
+    "pId": 350000,
+    "name": "龙岩市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 350900,
+    "pId": 350000,
+    "name": "宁德市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360100,
+    "pId": 360000,
+    "name": "南昌市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360200,
+    "pId": 360000,
+    "name": "景德镇市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360300,
+    "pId": 360000,
+    "name": "萍乡市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360400,
+    "pId": 360000,
+    "name": "九江市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360500,
+    "pId": 360000,
+    "name": "新余市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360600,
+    "pId": 360000,
+    "name": "鹰潭市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360700,
+    "pId": 360000,
+    "name": "赣州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360800,
+    "pId": 360000,
+    "name": "吉安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 360900,
+    "pId": 360000,
+    "name": "宜春市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 361000,
+    "pId": 360000,
+    "name": "抚州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 361100,
+    "pId": 360000,
+    "name": "上饶市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370100,
+    "pId": 370000,
+    "name": "济南市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370200,
+    "pId": 370000,
+    "name": "青岛市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370300,
+    "pId": 370000,
+    "name": "淄博市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370400,
+    "pId": 370000,
+    "name": "枣庄市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370500,
+    "pId": 370000,
+    "name": "东营市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370600,
+    "pId": 370000,
+    "name": "烟台市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370700,
+    "pId": 370000,
+    "name": "潍坊市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370800,
+    "pId": 370000,
+    "name": "济宁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 370900,
+    "pId": 370000,
+    "name": "泰安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371000,
+    "pId": 370000,
+    "name": "威海市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371100,
+    "pId": 370000,
+    "name": "日照市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371200,
+    "pId": 370000,
+    "name": "莱芜市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371300,
+    "pId": 370000,
+    "name": "临沂市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371400,
+    "pId": 370000,
+    "name": "德州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371500,
+    "pId": 370000,
+    "name": "聊城市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371600,
+    "pId": 370000,
+    "name": "滨州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 371700,
+    "pId": 370000,
+    "name": "菏泽市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410100,
+    "pId": 410000,
+    "name": "郑州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410200,
+    "pId": 410000,
+    "name": "开封市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410300,
+    "pId": 410000,
+    "name": "洛阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410400,
+    "pId": 410000,
+    "name": "平顶山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410500,
+    "pId": 410000,
+    "name": "安阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410600,
+    "pId": 410000,
+    "name": "鹤壁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410700,
+    "pId": 410000,
+    "name": "新乡市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410800,
+    "pId": 410000,
+    "name": "焦作市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 410900,
+    "pId": 410000,
+    "name": "濮阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411000,
+    "pId": 410000,
+    "name": "许昌市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411100,
+    "pId": 410000,
+    "name": "漯河市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411200,
+    "pId": 410000,
+    "name": "三门峡市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411300,
+    "pId": 410000,
+    "name": "南阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411400,
+    "pId": 410000,
+    "name": "商丘市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411500,
+    "pId": 410000,
+    "name": "信阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411600,
+    "pId": 410000,
+    "name": "周口市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 411700,
+    "pId": 410000,
+    "name": "驻马店市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 419000,
+    "pId": 410000,
+    "name": "省直辖县级行政区划",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420100,
+    "pId": 420000,
+    "name": "武汉市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420200,
+    "pId": 420000,
+    "name": "黄石市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420300,
+    "pId": 420000,
+    "name": "十堰市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420500,
+    "pId": 420000,
+    "name": "宜昌市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420600,
+    "pId": 420000,
+    "name": "襄阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420700,
+    "pId": 420000,
+    "name": "鄂州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420800,
+    "pId": 420000,
+    "name": "荆门市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 420900,
+    "pId": 420000,
+    "name": "孝感市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 421000,
+    "pId": 420000,
+    "name": "荆州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 421100,
+    "pId": 420000,
+    "name": "黄冈市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 421200,
+    "pId": 420000,
+    "name": "咸宁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 421300,
+    "pId": 420000,
+    "name": "随州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 422800,
+    "pId": 420000,
+    "name": "恩施土家族苗族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 429000,
+    "pId": 420000,
+    "name": "省直辖县级行政区划",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430100,
+    "pId": 430000,
+    "name": "长沙市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430200,
+    "pId": 430000,
+    "name": "株洲市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430300,
+    "pId": 430000,
+    "name": "湘潭市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430400,
+    "pId": 430000,
+    "name": "衡阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430500,
+    "pId": 430000,
+    "name": "邵阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430600,
+    "pId": 430000,
+    "name": "岳阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430700,
+    "pId": 430000,
+    "name": "常德市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430800,
+    "pId": 430000,
+    "name": "张家界市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 430900,
+    "pId": 430000,
+    "name": "益阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 431000,
+    "pId": 430000,
+    "name": "郴州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 431100,
+    "pId": 430000,
+    "name": "永州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 431200,
+    "pId": 430000,
+    "name": "怀化市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 431300,
+    "pId": 430000,
+    "name": "娄底市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 433100,
+    "pId": 430000,
+    "name": "湘西土家族苗族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440100,
+    "pId": 440000,
+    "name": "广州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440200,
+    "pId": 440000,
+    "name": "韶关市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440300,
+    "pId": 440000,
+    "name": "深圳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440400,
+    "pId": 440000,
+    "name": "珠海市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440500,
+    "pId": 440000,
+    "name": "汕头市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440600,
+    "pId": 440000,
+    "name": "佛山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440700,
+    "pId": 440000,
+    "name": "江门市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440800,
+    "pId": 440000,
+    "name": "湛江市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 440900,
+    "pId": 440000,
+    "name": "茂名市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441200,
+    "pId": 440000,
+    "name": "肇庆市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441300,
+    "pId": 440000,
+    "name": "惠州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441400,
+    "pId": 440000,
+    "name": "梅州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441500,
+    "pId": 440000,
+    "name": "汕尾市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441600,
+    "pId": 440000,
+    "name": "河源市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441700,
+    "pId": 440000,
+    "name": "阳江市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441800,
+    "pId": 440000,
+    "name": "清远市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 441900,
+    "pId": 440000,
+    "name": "东莞市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 442000,
+    "pId": 440000,
+    "name": "中山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 445100,
+    "pId": 440000,
+    "name": "潮州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 445200,
+    "pId": 440000,
+    "name": "揭阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 445300,
+    "pId": 440000,
+    "name": "云浮市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450100,
+    "pId": 450000,
+    "name": "南宁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450200,
+    "pId": 450000,
+    "name": "柳州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450300,
+    "pId": 450000,
+    "name": "桂林市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450400,
+    "pId": 450000,
+    "name": "梧州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450500,
+    "pId": 450000,
+    "name": "北海市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450600,
+    "pId": 450000,
+    "name": "防城港市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450700,
+    "pId": 450000,
+    "name": "钦州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450800,
+    "pId": 450000,
+    "name": "贵港市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 450900,
+    "pId": 450000,
+    "name": "玉林市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 451000,
+    "pId": 450000,
+    "name": "百色市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 451100,
+    "pId": 450000,
+    "name": "贺州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 451200,
+    "pId": 450000,
+    "name": "河池市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 451300,
+    "pId": 450000,
+    "name": "来宾市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 451400,
+    "pId": 450000,
+    "name": "崇左市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 460100,
+    "pId": 460000,
+    "name": "海口市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 460200,
+    "pId": 460000,
+    "name": "三亚市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 460300,
+    "pId": 460000,
+    "name": "三沙市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 469000,
+    "pId": 460000,
+    "name": "省直辖县级行政区划",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500101,
+    "pId": 500000,
+    "name": "万州区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500102,
+    "pId": 500000,
+    "name": "涪陵区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500103,
+    "pId": 500000,
+    "name": "渝中区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500104,
+    "pId": 500000,
+    "name": "大渡口区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500105,
+    "pId": 500000,
+    "name": "江北区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500106,
+    "pId": 500000,
+    "name": "沙坪坝区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500107,
+    "pId": 500000,
+    "name": "九龙坡区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500108,
+    "pId": 500000,
+    "name": "南岸区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500109,
+    "pId": 500000,
+    "name": "北碚区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500110,
+    "pId": 500000,
+    "name": "綦江区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500111,
+    "pId": 500000,
+    "name": "大足区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500112,
+    "pId": 500000,
+    "name": "渝北区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500113,
+    "pId": 500000,
+    "name": "巴南区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500114,
+    "pId": 500000,
+    "name": "黔江区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500115,
+    "pId": 500000,
+    "name": "长寿区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500116,
+    "pId": 500000,
+    "name": "江津区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500117,
+    "pId": 500000,
+    "name": "合川区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500118,
+    "pId": 500000,
+    "name": "永川区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500119,
+    "pId": 500000,
+    "name": "南川区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500223,
+    "pId": 500000,
+    "name": "潼南县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500224,
+    "pId": 500000,
+    "name": "铜梁县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500226,
+    "pId": 500000,
+    "name": "荣昌县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500227,
+    "pId": 500000,
+    "name": "璧山县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500228,
+    "pId": 500000,
+    "name": "梁平县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500229,
+    "pId": 500000,
+    "name": "城口县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500230,
+    "pId": 500000,
+    "name": "丰都县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500231,
+    "pId": 500000,
+    "name": "垫江县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500232,
+    "pId": 500000,
+    "name": "武隆县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500233,
+    "pId": 500000,
+    "name": "忠县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500234,
+    "pId": 500000,
+    "name": "开县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500235,
+    "pId": 500000,
+    "name": "云阳县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500236,
+    "pId": 500000,
+    "name": "奉节县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500237,
+    "pId": 500000,
+    "name": "巫山县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500238,
+    "pId": 500000,
+    "name": "巫溪县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500240,
+    "pId": 500000,
+    "name": "石柱土家族自治县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500241,
+    "pId": 500000,
+    "name": "秀山土家族苗族自治县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500242,
+    "pId": 500000,
+    "name": "酉阳土家族苗族自治县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 500243,
+    "pId": 500000,
+    "name": "彭水苗族土家族自治县",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510100,
+    "pId": 510000,
+    "name": "成都市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510300,
+    "pId": 510000,
+    "name": "自贡市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510400,
+    "pId": 510000,
+    "name": "攀枝花市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510500,
+    "pId": 510000,
+    "name": "泸州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510600,
+    "pId": 510000,
+    "name": "德阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510700,
+    "pId": 510000,
+    "name": "绵阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510800,
+    "pId": 510000,
+    "name": "广元市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 510900,
+    "pId": 510000,
+    "name": "遂宁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511000,
+    "pId": 510000,
+    "name": "内江市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511100,
+    "pId": 510000,
+    "name": "乐山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511300,
+    "pId": 510000,
+    "name": "南充市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511400,
+    "pId": 510000,
+    "name": "眉山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511500,
+    "pId": 510000,
+    "name": "宜宾市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511600,
+    "pId": 510000,
+    "name": "广安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511700,
+    "pId": 510000,
+    "name": "达州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511800,
+    "pId": 510000,
+    "name": "雅安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 511900,
+    "pId": 510000,
+    "name": "巴中市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 512000,
+    "pId": 510000,
+    "name": "资阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 513200,
+    "pId": 510000,
+    "name": "阿坝藏族羌族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 513300,
+    "pId": 510000,
+    "name": "甘孜藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 513400,
+    "pId": 510000,
+    "name": "凉山彝族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 520100,
+    "pId": 520000,
+    "name": "贵阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 520200,
+    "pId": 520000,
+    "name": "六盘水市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 520300,
+    "pId": 520000,
+    "name": "遵义市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 520400,
+    "pId": 520000,
+    "name": "安顺市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 520500,
+    "pId": 520000,
+    "name": "毕节市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 520600,
+    "pId": 520000,
+    "name": "铜仁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 522300,
+    "pId": 520000,
+    "name": "黔西南布依族苗族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 522600,
+    "pId": 520000,
+    "name": "黔东南苗族侗族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 522700,
+    "pId": 520000,
+    "name": "黔南布依族苗族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530100,
+    "pId": 530000,
+    "name": "昆明市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530300,
+    "pId": 530000,
+    "name": "曲靖市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530400,
+    "pId": 530000,
+    "name": "玉溪市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530500,
+    "pId": 530000,
+    "name": "保山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530600,
+    "pId": 530000,
+    "name": "昭通市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530700,
+    "pId": 530000,
+    "name": "丽江市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530800,
+    "pId": 530000,
+    "name": "普洱市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 530900,
+    "pId": 530000,
+    "name": "临沧市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 532300,
+    "pId": 530000,
+    "name": "楚雄彝族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 532500,
+    "pId": 530000,
+    "name": "红河哈尼族彝族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 532600,
+    "pId": 530000,
+    "name": "文山壮族苗族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 532800,
+    "pId": 530000,
+    "name": "西双版纳傣族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 532900,
+    "pId": 530000,
+    "name": "大理白族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 533100,
+    "pId": 530000,
+    "name": "德宏傣族景颇族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 533300,
+    "pId": 530000,
+    "name": "怒江傈僳族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 533400,
+    "pId": 530000,
+    "name": "迪庆藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 540100,
+    "pId": 540000,
+    "name": "拉萨市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 542100,
+    "pId": 540000,
+    "name": "昌都地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 542200,
+    "pId": 540000,
+    "name": "山南地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 542300,
+    "pId": 540000,
+    "name": "日喀则地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 542400,
+    "pId": 540000,
+    "name": "那曲地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 542500,
+    "pId": 540000,
+    "name": "阿里地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 542600,
+    "pId": 540000,
+    "name": "林芝地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610100,
+    "pId": 610000,
+    "name": "西安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610200,
+    "pId": 610000,
+    "name": "铜川市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610300,
+    "pId": 610000,
+    "name": "宝鸡市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610400,
+    "pId": 610000,
+    "name": "咸阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610500,
+    "pId": 610000,
+    "name": "渭南市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610600,
+    "pId": 610000,
+    "name": "延安市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610700,
+    "pId": 610000,
+    "name": "汉中市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610800,
+    "pId": 610000,
+    "name": "榆林市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 610900,
+    "pId": 610000,
+    "name": "安康市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 611000,
+    "pId": 610000,
+    "name": "商洛市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620100,
+    "pId": 620000,
+    "name": "兰州市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620200,
+    "pId": 620000,
+    "name": "嘉峪关市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620300,
+    "pId": 620000,
+    "name": "金昌市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620400,
+    "pId": 620000,
+    "name": "白银市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620500,
+    "pId": 620000,
+    "name": "天水市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620600,
+    "pId": 620000,
+    "name": "武威市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620700,
+    "pId": 620000,
+    "name": "张掖市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620800,
+    "pId": 620000,
+    "name": "平凉市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 620900,
+    "pId": 620000,
+    "name": "酒泉市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 621000,
+    "pId": 620000,
+    "name": "庆阳市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 621100,
+    "pId": 620000,
+    "name": "定西市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 621200,
+    "pId": 620000,
+    "name": "陇南市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 622900,
+    "pId": 620000,
+    "name": "临夏回族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 623000,
+    "pId": 620000,
+    "name": "甘南藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 630100,
+    "pId": 630000,
+    "name": "西宁市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 630200,
+    "pId": 630000,
+    "name": "海东市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 632200,
+    "pId": 630000,
+    "name": "海北藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 632300,
+    "pId": 630000,
+    "name": "黄南藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 632500,
+    "pId": 630000,
+    "name": "海南藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 632600,
+    "pId": 630000,
+    "name": "果洛藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 632700,
+    "pId": 630000,
+    "name": "玉树藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 632800,
+    "pId": 630000,
+    "name": "海西蒙古族藏族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 640100,
+    "pId": 640000,
+    "name": "银川市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 640200,
+    "pId": 640000,
+    "name": "石嘴山市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 640300,
+    "pId": 640000,
+    "name": "吴忠市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 640400,
+    "pId": 640000,
+    "name": "固原市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 640500,
+    "pId": 640000,
+    "name": "中卫市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 650100,
+    "pId": 650000,
+    "name": "乌鲁木齐市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 650200,
+    "pId": 650000,
+    "name": "克拉玛依市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 652100,
+    "pId": 650000,
+    "name": "吐鲁番地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 652200,
+    "pId": 650000,
+    "name": "哈密地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 652300,
+    "pId": 650000,
+    "name": "昌吉回族自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 652700,
+    "pId": 650000,
+    "name": "博尔塔拉蒙古自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 652800,
+    "pId": 650000,
+    "name": "巴音郭楞蒙古自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 652900,
+    "pId": 650000,
+    "name": "阿克苏地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 653000,
+    "pId": 650000,
+    "name": "克孜勒苏柯尔克孜自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 653100,
+    "pId": 650000,
+    "name": "喀什地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 653200,
+    "pId": 650000,
+    "name": "和田地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 654000,
+    "pId": 650000,
+    "name": "伊犁哈萨克自治州",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 654200,
+    "pId": 650000,
+    "name": "塔城地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 654300,
+    "pId": 650000,
+    "name": "阿勒泰地区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 659000,
+    "pId": 650000,
+    "name": "自治区直辖县级行政区划",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 110000,
+    "pId": null,
+    "name": "北京市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 120000,
+    "pId": null,
+    "name": "天津市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 130000,
+    "pId": null,
+    "name": "河北省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 140000,
+    "pId": null,
+    "name": "山西省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 150000,
+    "pId": null,
+    "name": "内蒙古自治区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 210000,
+    "pId": null,
+    "name": "辽宁省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 220000,
+    "pId": null,
+    "name": "吉林省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 230000,
+    "pId": null,
+    "name": "黑龙江省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 310000,
+    "pId": null,
+    "name": "上海市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 320000,
+    "pId": null,
+    "name": "江苏省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 330000,
+    "pId": null,
+    "name": "浙江省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 340000,
+    "pId": null,
+    "name": "安徽省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 350000,
+    "pId": null,
+    "name": "福建省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 360000,
+    "pId": null,
+    "name": "江西省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 370000,
+    "pId": null,
+    "name": "山东省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 410000,
+    "pId": null,
+    "name": "河南省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 420000,
+    "pId": null,
+    "name": "湖北省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 430000,
+    "pId": null,
+    "name": "湖南省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 440000,
+    "pId": null,
+    "name": "广东省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 450000,
+    "pId": null,
+    "name": "广西壮族自治区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 460000,
+    "pId": null,
+    "name": "海南省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 500000,
+    "pId": null,
+    "name": "重庆市",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 510000,
+    "pId": null,
+    "name": "四川省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 520000,
+    "pId": null,
+    "name": "贵州省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 530000,
+    "pId": null,
+    "name": "云南省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 540000,
+    "pId": null,
+    "name": "西藏自治区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 610000,
+    "pId": null,
+    "name": "陕西省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 620000,
+    "pId": null,
+    "name": "甘肃省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 630000,
+    "pId": null,
+    "name": "青海省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 640000,
+    "pId": null,
+    "name": "宁夏回族自治区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 650000,
+    "pId": null,
+    "name": "新疆维吾尔自治区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": true
+  },
+  {
+    "id": 710000,
+    "pId": null,
+    "name": "台湾省",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 810000,
+    "pId": null,
+    "name": "香港特别行政区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  },
+  {
+    "id": 820000,
+    "pId": null,
+    "name": "澳门特别行政区",
+    "open": false,
+    "checked": false,
+    "chkDisabled": false
+  }
+]

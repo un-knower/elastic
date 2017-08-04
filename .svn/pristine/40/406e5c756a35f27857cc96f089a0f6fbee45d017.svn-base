@@ -1,0 +1,16 @@
+EsUrl = http://192.168.0.30:9200/
+EsLocation = 192.168.0.30
+#HTTP端口
+BASIC_PORT = 9200
+#SDK scoket端口
+ESscoke_PORT = 9300
+ES_NAME = elastic
+ES_PASSWORD = ES_PASSWORD
+#商品别名
+ES_sp_IndexAlias = article
+#签约商家别名
+ES_shop_IndexAlias = shop
+#推荐商家别名
+ES_shop_hot_IndexAlias = shop_hot
+#抓取商家别名
+ES_shop_extra_IndexAlias = shop_extra

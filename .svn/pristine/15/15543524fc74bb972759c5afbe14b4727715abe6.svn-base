@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>
+	<!-- 驱动包 -->
+	<!-- <classPathEntry location="C:\Users\Mr.ShyMe\.m2\repository\mysql\mysql-connector-java\5.1.31\mysql-connector-java-5.1.31.jar" /> -->
+	<classPathEntry location="E:\.m2\repository\mysql\mysql-connector-java\5.1.31\mysql-connector-java-5.1.31.jar" />
+	<context id="MySqlTables" targetRuntime="MyBatis3" introspectedColumnImpl="com.manji.elastic.common.mybatis.generator.SimpleIntrospectedColumn">  
+		<property name="javaFileEncoding" value="UTF8" />
+		<plugin type="com.manji.elastic.common.mybatis.generator.SimpleGeneratorPlugin" />
+		<commentGenerator
+			type="com.manji.elastic.common.mybatis.generator.SimpleCommentGenerator">
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!-- 数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://47.92.95.99:3306/elastic_test?useUnicode=true&amp;characterEncoding=UTF8"
+			userId="root" password="elastic2018!@#">
+		</jdbcConnection>
+		
+    	<!-- model的配置  -->
+		<javaModelGenerator targetPackage="com.manji.elastic.dal.mybatis.model"
+			targetProject="elastic\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true"/>
+			<property name="exampleRootClass"
+				value="com.manji.elastic.common.mybatis.model.ModelExample" />
+		</javaModelGenerator>
+		
+		<!--mybatis的xml的配置  -->
+		<sqlMapGenerator targetPackage="mybatis.mapper" targetProject="elastic\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		
+		<!--mapper的配置  -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.manji.elastic.dal.mybatis.mapper" targetProject="elastic\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="clientRootInterface"
+				value="com.manji.elastic.common.mybatis.mapper.Mapper" />
+		</javaClientGenerator>
+		<!-- <table tableName="elastic_user" domainObjectName="elasticUser"></table> -->
+		<!-- <table tableName="elastic_user_sanfang" domainObjectName="elasticUserSanfang"></table> -->
+		<!-- <table tableName="elastic_smscode" domainObjectName="elasticSmscode"></table> -->
+		<table tableName="elastic_sys_ip_rec" domainObjectName="elasticSysIpRec"></table>
+		<!-- <table tableName="elastic_config_resource_params" domainObjectName="elasticConfigResourceParams"></table> -->
+	</context> 
+</generatorConfiguration>
