@@ -50,9 +50,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 @Api(value = "/api-serch/v2", description = " 二期搜索 ---- 商品部分")
 @RequestMapping("/api/serch/commodity/v2/")
 public class V2CommoditySerchApiController {
-	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	/**
 	 * 输入关键字综合搜索商品,商家
 	 * @param req
