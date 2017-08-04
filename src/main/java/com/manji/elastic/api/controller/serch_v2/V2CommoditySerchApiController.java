@@ -47,7 +47,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
  *
  */
 @Controller
-@Api(value = "/api-serch/v2", description = " 二期搜索 ---- 商品部分")
+@Api(value = "/api-serch_commodity_v2", description = " 二期搜索 ---- 商品部分")
 @RequestMapping("/api/serch/commodity/v2/")
 public class V2CommoditySerchApiController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

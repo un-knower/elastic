@@ -45,7 +45,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
  *
  */
 @Controller
-@Api(value = "/api-serch/v2", description = " 二期搜索 ---商家部分")
+@Api(value = "/api-serch_shop_v2", description = " 二期搜索 ---商家部分")
 @RequestMapping("/api/serch/shop/v2/")
 public class V2ShopSerchApiController {
 	
