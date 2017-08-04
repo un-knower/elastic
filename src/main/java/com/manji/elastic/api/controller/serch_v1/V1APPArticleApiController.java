@@ -2,8 +2,6 @@ package com.manji.elastic.api.controller.serch_v1;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.manji.elastic.api.controller.serch_v1.requestModel.app.AppArticleQuery;
 import com.manji.elastic.api.controller.serch_v1.requestModel.app.AppShopArticleQuery;
 import com.manji.elastic.common.global.Configure;
@@ -34,8 +32,9 @@ import com.wordnik.swagger.annotations.ApiOperation;
  * @author Administrator
  *
  */
+@ApiIgnore
 @Controller
-@Api(value = "/app-Article", description = "一期接口，APP商品")
+@Api(value = "/app-Article", description = "一期接口（保留兼容线上已运行产品），APP商品")
 @RequestMapping("/app/article")
 public class V1APPArticleApiController {
 	
@@ -49,7 +48,7 @@ public class V1APPArticleApiController {
 	@ResponseBody
 	@ApiOperation(value = "综合商品查询", notes = "综合商品查询")
 	@RequestMapping(value="/queryArticle", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Object queryArticle(HttpServletRequest req,@RequestBody AppArticleQuery query){
+	public Object queryArticle(HttpServletRequest req, AppArticleQuery query){
 		try{
 			int from = (query.getPageNum() - 1) * query.getSize();
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
@@ -133,19 +132,21 @@ public class V1APPArticleApiController {
 	@RequestMapping(value="/satisfiedList", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Object satisfiedList(HttpServletRequest req,@RequestParam(required = false) Integer size,@RequestParam(required = false) Integer pageNum){
 		try{
+			if(size == null ){
+				size = 20;
+			}
+			if(pageNum == null){
+				pageNum = 1;
+			}
 			int from = (pageNum - 1) * size;
 			StringBuffer sb = new StringBuffer("{\"query\":  { \"match_all\": {} }");
 			sb.append(
 					",\"sort\": [{\"article_order_times\":{\"order\":\"desc\"}},{\"article_review_score\":{\"order\":\"desc\"}}]");
 			sb.append(",\"size\": " + size + ",\"from\": " + from + "}");
-			Map<String,String> headerMap = new HashMap<String,String>();
-			headerMap.put("Content-Type","application/json"); 
-			headerMap.put("charset","UTF-8");
-			headerMap.put("Accept", "application/json");
-			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), null, headerMap);
+			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
 			JSONObject jsonObj = JSON.parseObject(esReturn);  
 			JSONObject result = (JSONObject) jsonObj.get("hits");
-	        return result;
+			return result;
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("系统异常，{}", e.getMessage());
@@ -165,14 +166,16 @@ public class V1APPArticleApiController {
 	public Object similarRecommend(HttpServletRequest req,@RequestParam(required = false) Integer size,@RequestParam(required = false) Integer pageNum,
 			@RequestParam(required = false) String goods_id,@RequestParam(required = false) Integer shop_id){
 		try{
+			if(size == null ){
+				size = 20;
+			}
+			if(pageNum == null){
+				pageNum = 1;
+			}
 			int from = (pageNum - 1) * size;
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [{\"match\": {\"article_id\":\"" + goods_id + "\"}}]}}}");
 			
-			Map<String,String> headerMap = new HashMap<String,String>();
-			headerMap.put("Content-Type","application/json"); 
-			headerMap.put("charset","UTF-8");
-			headerMap.put("Accept", "application/json");
-			String esReturn1 = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), null, headerMap);
+			String esReturn1 = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
 			
 			JSONObject jsonObj = JSON.parseObject(esReturn1);  
 			JSONObject result = (JSONObject) jsonObj.get("hits");
@@ -192,12 +195,11 @@ public class V1APPArticleApiController {
 			sb2.append(",\"sort\":[{\"article_add_time\":{\"order\":\"desc\"}}]");
 			sb2.append(",\"size\": " + size + ",\"from\": " + from + "}");
 			
-			
 			String esReturn2 = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb2.toString().replace("must\": [,", "must\": ["),"application/json", null);
 			
 			JSONObject jsonObj2 = JSON.parseObject(esReturn2);  
 			JSONObject result2 = (JSONObject) jsonObj2.get("hits");
-	        return result2;
+			return result2;
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("系统异常，{}", e.getMessage());
@@ -214,7 +216,7 @@ public class V1APPArticleApiController {
 	@ResponseBody
 	@ApiOperation(value = "商家类查询", notes = "商家类查询")
 	@RequestMapping(value="/articleOfShop", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Object articleOfShop(HttpServletRequest req,@RequestBody AppArticleQuery query){
+	public Object articleOfShop(HttpServletRequest req, AppArticleQuery query){
 		try{
 			int from = (query.getPageNum() - 1) * query.getSize();
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
@@ -325,7 +327,7 @@ public class V1APPArticleApiController {
 	@ResponseBody
 	@ApiOperation(value = "商家商品綜合查詢", notes = "商家商品綜合查詢")
 	@RequestMapping(value="/shopArticle", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Object shopArticle(HttpServletRequest req,@RequestBody AppShopArticleQuery query){
+	public Object shopArticle(HttpServletRequest req, AppShopArticleQuery query){
 		try{
 			int from = (query.getPageNum() - 1) * query.getSize();
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");

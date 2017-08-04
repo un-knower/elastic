@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.manji.elastic.api.controller.serch_v1.requestModel.app.AppShopQuery;
 import com.manji.elastic.common.global.Configure;
 import com.manji.elastic.common.util.HttpClientUtil;
@@ -29,8 +29,9 @@ import com.wordnik.swagger.annotations.ApiOperation;
  * @author Administrator
  *
  */
+@ApiIgnore
 @Controller
-@Api(value = "/app-Shop", description = "一期接口，APP商家")
+@Api(value = "/app-Shop", description = "一期接口（保留兼容线上已运行产品），APP商家")
 @RequestMapping("/app/shop")
 public class V1APPShopApiController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -42,7 +43,7 @@ public class V1APPShopApiController {
 	@ResponseBody
 	@ApiOperation(value = "商家综合查询", notes = "商家综合查询")
 	@RequestMapping(value="/queryShop", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Object queryShop(HttpServletRequest req,@RequestBody AppShopQuery query){
+	public Object queryShop(HttpServletRequest req, AppShopQuery query){
 		try{
 			// 获取传入的地理位置
 			String location = query.getLocation();
@@ -155,7 +156,7 @@ public class V1APPShopApiController {
 	@ResponseBody
 	@ApiOperation(value = "推荐商家", notes = "推荐商家")
 	@RequestMapping(value="/queryHotShop", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Object queryHotShop(HttpServletRequest req,@RequestBody AppShopQuery query){
+	public Object queryHotShop(HttpServletRequest req, AppShopQuery query){
 		try{
 			String area_code = query.getArea_code();
 			int len = area_code.length();

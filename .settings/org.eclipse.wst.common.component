@@ -7,7 +7,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
         <property name="context-root" value="elastic"/>
-        <property name="java-output-path" value="/elastic_v2/target/classes"/>
+        <property name="java-output-path" value="/elastic/target/classes"/>
         <property name="component.exclusion.patterns" value="elastic/upload/**"/>
     </wb-module>
 </project-modules>

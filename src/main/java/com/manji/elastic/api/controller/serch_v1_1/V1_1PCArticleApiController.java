@@ -1,4 +1,4 @@
-package com.manji.elastic.api.controller.serch_v2;
+package com.manji.elastic.api.controller.serch_v1_1;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.manji.elastic.common.exception.BusinessDealException;
 import com.manji.elastic.common.global.Configure;
 import com.manji.elastic.common.result.BaseObjectResult;
@@ -37,15 +38,16 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 /**
- * 二期接口，这里保留
+ * 一期改造练手接口
  * PC 商品
  * @author Administrator
  *
  */
+@ApiIgnore
 @Controller
-@Api(value = "/pc-Articlev2", description = "二期接口，PC 商品查询")
-@RequestMapping("/pc/article/v2")
-public class V2PCArticleApiController {
+@Api(value = "/pc-Articlev1_1", description = "一期改造练手接口，PC 商品查询")
+@RequestMapping("/pc/article/v1_1")
+public class V1_1PCArticleApiController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 商品查询

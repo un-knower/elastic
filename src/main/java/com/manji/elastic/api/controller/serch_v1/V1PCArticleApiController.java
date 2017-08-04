@@ -9,13 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.manji.elastic.api.controller.serch_v1.requestModel.app.AppArticleQuery;
 import com.manji.elastic.common.global.Configure;
 import com.manji.elastic.common.util.HttpClientUtil;
@@ -28,8 +28,9 @@ import com.wordnik.swagger.annotations.ApiOperation;
  * @author Administrator
  *
  */
+@ApiIgnore
 @Controller
-@Api(value = "/pc-Article", description = "一期接口，PC 商品")
+@Api(value = "/pc-Article", description = "一期接口（保留兼容线上已运行产品），PC 商品")
 @RequestMapping("/pc/article")
 public class V1PCArticleApiController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -41,7 +42,7 @@ public class V1PCArticleApiController {
 	@ResponseBody
 	@ApiOperation(value = "商品查询", notes = "商品查询")
 	@RequestMapping(value="/queryArticle", method = {RequestMethod.GET,RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Object queryArticle(HttpServletRequest req,@RequestBody AppArticleQuery query){
+	public Object queryArticle(HttpServletRequest req, AppArticleQuery query){
 		try{
 			int from = (query.getPageNum() - 1) * query.getSize();
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
@@ -103,7 +104,7 @@ public class V1PCArticleApiController {
 			JSONObject jsonObj = JSON.parseObject(esReturn);  
 			JSONObject result = (JSONObject) jsonObj.get("hits");
 			
-	        return result;
+			return result;
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("系统异常，{}", e.getMessage());
