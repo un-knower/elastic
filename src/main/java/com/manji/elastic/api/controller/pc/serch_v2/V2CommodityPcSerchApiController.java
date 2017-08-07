@@ -42,7 +42,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
  *
  */
 @Controller
-@Api(value = "/api-serch_commodity_v2", description = " 二期搜索 ---- 商品PC部分")
+@Api(value = "/api-serch_pc_commodity_v2", description = " 二期搜索 ---- 商品PC部分")
 @RequestMapping("/api/pc/serch/commodity/v2/")
 public class V2CommodityPcSerchApiController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

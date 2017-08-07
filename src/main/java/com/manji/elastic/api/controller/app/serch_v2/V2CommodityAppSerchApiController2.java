@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -14,8 +15,9 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
-import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -48,9 +50,9 @@ import com.wordnik.swagger.annotations.ApiOperation;
  *
  */
 @Controller
-@Api(value = "/api-serch_app_commodity_v2", description = " 二期搜索 ---- 商品APP部分")
-@RequestMapping("/api/app/serch/commodity/v2/")
-public class V2CommodityAppSerchApiController {
+@Api(value = "/api-serch_app_commodity_v21", description = " 二期搜索 ---- 商品APP部分")
+@RequestMapping("/api/app/serch/commodity/v21/")
+public class V2CommodityAppSerchApiController2 {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 输入关键字综合搜索商品,商家
@@ -75,7 +77,7 @@ public class V2CommodityAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(QueryBuilders.matchQuery("article_category_index",body.getQueryStr()).operator(Operator.AND));
+				qb1.must(QueryBuilders.matchQuery("article_category_index",body.getQueryStr()));
 			}
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias()).setTypes("info");
 			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
@@ -145,28 +147,42 @@ public class V2CommodityAppSerchApiController {
 			//连接服务端
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
+			BoolQueryBuilder qb2 = QueryBuilders.boolQuery();
+			
+			//关键字精确包含
+			MatchPhraseQueryBuilder anc = QueryBuilders.matchPhraseQuery("article_category_index", body.getQueryStr());
+			//关键字分词查询
+			MatchQueryBuilder ancFc =QueryBuilders.matchQuery("article_category_index",body.getQueryStr());
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(QueryBuilders.matchQuery("article_category_index", body.getQueryStr()).operator(Operator.AND));
+				qb1.must(anc);
+				qb2.must(ancFc);
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
 				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+				qb2.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
 			}
 			//是否包邮
 			if(null != body.getShip_flag()){
 				qb1.must(QueryBuilders.matchQuery("is_free",1));
+				qb2.must(QueryBuilders.matchQuery("is_free",1));
 			}
 			//折扣类型
 			if(null != body.getSale_flag()){
 				qb1.must(QueryBuilders.matchQuery("case_article_activity_type",body.getSale_flag()));
+				qb2.must(QueryBuilders.matchQuery("case_article_activity_type",body.getSale_flag()));
 			}
 			//区域Code
 			if(StringUtils.isNotBlank(body.getArea_code())){
 				qb1.must(QueryBuilders.matchQuery("article_distribution_area",body.getArea_code()));
+				qb2.must(QueryBuilders.matchQuery("article_distribution_area",body.getArea_code()));
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
+					QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()).lt(body.getPrice_end()) 
+					: QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()));
+			qb2.filter(body.getPrice_end() != null ? 
 					QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()).lt(body.getPrice_end()) 
 					: QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()));
 			//排序处理
@@ -189,11 +205,22 @@ public class V2CommodityAppSerchApiController {
 				requestBuider.addSort(sortBuilder);
 			}
 			requestBuider.setFrom((body.getPageNum() - 1) * body.getSize()).setSize(body.getSize());
-			logger.info("参数json:{}",requestBuider.toString());
-			//执行查询结果
+			logger.info("参数1json:{}",requestBuider.toString());
+			//执行查询结果(精确包含)
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			logger.info("结果1:" + JSON.toJSONString(hits).toString());
+			
+			//执行结果分词
+			requestBuider.setQuery(qb2);
+			logger.info("参数2json:{}",requestBuider.toString());
+			searchResponse = requestBuider.get();
+			SearchHits hits2 = searchResponse.getHits();
+			
+			SearchHit[] both = (SearchHit[]) ArrayUtils.addAll(hits.getHits(), hits2.getHits());
+			
+			hits = new SearchHits(both, hits.getTotalHits() + hits2.getTotalHits(), hits.getMaxScore());
+			logger.info("结果2:" + JSON.toJSONString(hits2).toString());
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
@@ -233,7 +260,7 @@ public class V2CommodityAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(QueryBuilders.matchQuery("article_category_index",body.getQueryStr()).operator(Operator.AND));
+				qb1.must(QueryBuilders.matchQuery("article_category_index",body.getQueryStr()));
 			}
 			//商家分类
 			if(StringUtils.isNotBlank(body.getShop_cate_id())){

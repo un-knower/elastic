@@ -13,6 +13,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.geo.GeoDistance;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHits;
@@ -45,7 +46,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
  *
  */
 @Controller
-@Api(value = "/api-serch_shop_v2", description = " 二期搜索 ---商家APP部分")
+@Api(value = "/api-serch_app_shop_v2", description = " 二期搜索 ---商家APP部分")
 @RequestMapping("/api/app/serch/shop/v2/")
 public class V2ShopAppSerchApiController {
 	
@@ -78,7 +79,7 @@ public class V2ShopAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(QueryBuilders.matchQuery("shopinfo_index",body.getQueryStr()));
+				qb1.must(QueryBuilders.matchQuery("name",body.getQueryStr()).operator(Operator.AND));
 			}
 			// 商家主营分类
 			if(StringUtils.isNotBlank(body.getBusy_id())){
