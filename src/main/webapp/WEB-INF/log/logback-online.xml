@@ -4,7 +4,7 @@
 
     <!-- 项目名称及日志目录定义 -->
     <property name="PROJECT_NAME" value="elastic"/>
-    <property name="LOG_HOME" value="/home/logs/tomcat/${PROJECT_NAME}"/>
+    <property name="LOG_HOME" value="/manji/log/tomcat/${PROJECT_NAME}"/>
 
     <contextName>${CONTEXT_NAME}</contextName>
 

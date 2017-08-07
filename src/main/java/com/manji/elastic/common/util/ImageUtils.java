@@ -15,15 +15,12 @@ import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-import sun.misc.BASE64Encoder;
 
 /**
  * 图片处理工具类：<br>
@@ -654,21 +651,5 @@ public class ImageUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	/**
-	 * 图片转化成base64字符串  
-	 * @return
-	 */
-	public static String GetImageStr(String imgPath)throws Exception{//将图片文件转化为字节数组字符串，并对其进行Base64编码处理  
-		InputStream in = null;  
-		byte[] data = null;  
-		//读取图片字节数组  
-		in = new FileInputStream(imgPath);
-		data = new byte[in.available()];
-		in.read(data);
-		in.close();
-		//对字节数组Base64编码  
-		BASE64Encoder encoder = new sun.misc.BASE64Encoder();  
-		return encoder.encode(data);//返回Base64编码过的字节数组字符串  
 	}
 }
