@@ -15,7 +15,7 @@ public class CommoditySerchModel extends BaseSerchModel {
 	private Integer ship_flag;//是否包邮，默认为0，1为包邮
 	private String dis_area_code;//配送地区
 	//排序方式
-	private Integer sort_flag = 0;//0默认综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序
+	private Integer sort_flag;//默认不传匹配排序>>>0综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序
 	
 	@ApiModelProperty(value = "分类ID")
 	public String getCate_id() {
@@ -73,7 +73,7 @@ public class CommoditySerchModel extends BaseSerchModel {
 	public void setDis_area_code(String dis_area_code) {
 		this.dis_area_code = dis_area_code;
 	}
-	@ApiModelProperty(value = "0默认综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序")
+	@ApiModelProperty(value = "默认不传匹配排序>>>0综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序")
 	public Integer getSort_flag() {
 		return sort_flag;
 	}

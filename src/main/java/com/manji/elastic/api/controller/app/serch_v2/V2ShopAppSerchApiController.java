@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -13,9 +14,11 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.geo.GeoDistance;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.DisMaxQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.GeoDistanceSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -32,11 +35,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.manji.elastic.api.commom.serchModel.ShopSerchModel;
 import com.manji.elastic.api.commom.utils.AreaCodeUtil;
+import com.manji.elastic.biz.helper.ElasticsearchClientUtils;
 import com.manji.elastic.common.exception.BusinessDealException;
 import com.manji.elastic.common.exception.NotFoundException;
 import com.manji.elastic.common.global.Configure;
 import com.manji.elastic.common.result.BaseObjectResult;
-import com.manji.elastic.common.util.ElasticsearchClientUtils;
 import com.manji.elastic.dal.enums.CodeEnum;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -67,19 +70,27 @@ public class V2ShopAppSerchApiController {
 	public BaseObjectResult<SearchHits> queryShop(HttpServletRequest req, @RequestBody ShopSerchModel body){
 		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
-			String lat = "";
-			String lon = "";
 			if(StringUtils.isBlank(body.getLocation())){
 				throw new BusinessDealException("获取位置信息失败~~~");
 			}
-			lat = body.getLocation().split(",")[0];
-			lon = body.getLocation().split(",")[1];
+			String lat = body.getLocation().split(",")[0];
+			String lon = body.getLocation().split(",")[1];
+			if(StringUtils.isBlank(lat) || StringUtils.isBlank(lon)){
+				throw new BusinessDealException("获取位置信息失败~~~");
+			}
 			//连接服务端
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(QueryBuilders.matchQuery("name",body.getQueryStr()).operator(Operator.AND));
+				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
+				//以关键字开头(优先级最高)
+				MatchQueryBuilder q1=QueryBuilders.matchQuery("name",body.getQueryStr()).boost(5);
+				//完整包含经过分析过的关键字
+				QueryBuilder q2=QueryBuilders.matchQuery("name.IKS", body.getQueryStr()).minimumShouldMatch("100%");
+				disMaxQueryBuilder.add(q1);
+				disMaxQueryBuilder.add(q2);
+				qb1.must(disMaxQueryBuilder);
 			}
 			// 商家主营分类
 			if(StringUtils.isNotBlank(body.getBusy_id())){
@@ -107,6 +118,7 @@ public class V2ShopAppSerchApiController {
 				.point(Double.valueOf(lat), Double.valueOf(lon))
 				.geoDistance(GeoDistance.ARC);
 			qb1.filter(builder);
+			
 			//排序方式
 			GeoDistanceSortBuilder sort = new GeoDistanceSortBuilder("latlng", Double.valueOf(lat), Double.valueOf(lon));
 			sort.unit(DistanceUnit.METERS);//距离单位米  
@@ -115,23 +127,66 @@ public class V2ShopAppSerchApiController {
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_shop_IndexAlias()).setTypes("info");
 			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
 			requestBuider.setQuery(qb1);
-			//距离排序
-			if(body.getSort_flag() == 0){
-				requestBuider.addSort(sort);
-			}
-			//评分和距离综合排序
-			if(body.getSort_flag() == 1){
-				requestBuider.addSort(SortBuilders.fieldSort("review_score").order(SortOrder.DESC));
-				requestBuider.addSort(sort);
+			if(null != body.getSort_flag()){
+				//距离排序
+				if(body.getSort_flag() == 0){
+					requestBuider.addSort(sort);
+				}
+				//评分和距离综合排序
+				if(body.getSort_flag() == 1){
+					requestBuider.addSort(SortBuilders.fieldSort("review_score").order(SortOrder.DESC));
+					sort.order(SortOrder.ASC); 
+					requestBuider.addSort(sort);
+				}
 			}
 			requestBuider.setFrom((body.getPageNum() - 1) * body.getSize()).setSize(body.getSize());
 			logger.info("参数json:{}",requestBuider.toString());
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			logger.info("签约商家结果:" + JSON.toJSONString(hits).toString());
+			//搜索签约商家完毕。处理数据不够，抓取数据来凑
+			int end =body.getPageNum()* body.getSize();
+			int signCount = (int) hits.getTotalHits();
+			if(end > signCount){
+				//构造查询抓取商家的查询条件
+				SearchRequestBuilder requestBuiderExtra = client.prepareSearch(Configure.getES_shop_extra_IndexAlias()).setTypes("info");
+				requestBuiderExtra.setSearchType(SearchType.QUERY_THEN_FETCH);
+				requestBuiderExtra.setQuery(qb1);
+				if(null != body.getSort_flag()){
+					//距离排序
+					if(body.getSort_flag() == 0){
+						requestBuiderExtra.addSort(sort);
+					}
+					//评分和距离综合排序
+					if(body.getSort_flag() == 1){
+						requestBuiderExtra.addSort(SortBuilders.fieldSort("review_score").order(SortOrder.DESC));
+						requestBuiderExtra.addSort(sort);
+					}
+				}
+				if(end -signCount < body.getSize()){
+					int hitsCount =hits.getHits().length;
+					int deCount =body.getSize() -hitsCount;
+					requestBuiderExtra.setFrom(0).setSize(deCount);
+					SearchResponse searchResponseExtra = requestBuiderExtra.get();
+					SearchHits hits1 = searchResponseExtra.getHits();
+					//hits1 和 hits合并
+					SearchHit[] both = (SearchHit[]) ArrayUtils.addAll(hits.getHits(), hits1.getHits());
+					hits = new SearchHits(both, hits1.getTotalHits() + hits.getTotalHits() , hits1.getMaxScore());
+				}else{
+					int extraStart =end -signCount-body.getSize();
+					requestBuiderExtra.setFrom(extraStart).setSize(body.getSize());
+					SearchResponse searchResponseExtra = requestBuiderExtra.get();
+					hits = searchResponseExtra.getHits();
+				}
+			}
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
+			}
+			
+			//默认匹配度排序无距离，单独处理距离信息
+			if(null == body.getSort_flag()){
+				hits = DistanceDoUtils.computerJl(body.getLocation(), hits);
 			}
 			baseResult.setResult(hits);
 		}catch (BusinessDealException e) {
@@ -171,7 +226,15 @@ public class V2ShopAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(QueryBuilders.matchQuery("shopinfo_index",body.getQueryStr()));
+				//qb1.must(QueryBuilders.matchQuery("shopinfo_index",body.getQueryStr()));
+				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
+				//以关键字开头(优先级最高)
+				MatchQueryBuilder q1=QueryBuilders.matchQuery("name",body.getQueryStr()).boost(5);
+				//完整包含经过分析过的关键字
+				QueryBuilder q2=QueryBuilders.matchQuery("name.IKS", body.getQueryStr()).minimumShouldMatch("100%");
+				disMaxQueryBuilder.add(q1);
+				disMaxQueryBuilder.add(q2);
+				qb1.must(disMaxQueryBuilder);
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
@@ -183,9 +246,7 @@ public class V2ShopAppSerchApiController {
 			}
 			//区域
 			qb1.must(QueryBuilders.matchQuery("area_code",areaCode));
-			if(StringUtils.isNotBlank(area_code)){
-				qb1.must(QueryBuilders.matchQuery("area",area_code));
-			}
+			
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_shop_hot_IndexAlias());
 			requestBuider.setTypes("info");
 			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);

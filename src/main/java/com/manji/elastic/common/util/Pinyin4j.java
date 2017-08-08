@@ -174,8 +174,20 @@ public final class Pinyin4j {
 		}else{//是汉子  转拼音
 			return getFirstSpell(shou).toUpperCase();
 		}
-    }
-    
+	}
+    /**
+     * 是否有中文开头，有则返回中文前缀
+     * @param key
+     * @return
+     */
+	public static String getStartChineseString(String key){
+		String returnStr = "";
+		if(key.matches("^[\u4e00-\u9fa5].*")){
+			returnStr = key.replaceAll("([\u4e00-\u9fa5]+).*","$1");
+		}
+		return returnStr;
+	}
+	
 	public static void main(String[] args) {
 		String str="区b$%#$%#a/-万山I-区";
 		System.out.println(getFirstZM(str));

@@ -11,7 +11,7 @@ public class ShopSerchModel extends BaseSerchModel {
 	private String area_code;
 	private Integer sign_flag;
 	private Integer open_flag;
-	private Integer sort_flag = 0;
+	private Integer sort_flag;//排序规则 0距离排序，1评分排序 。默认搜索不传，按照匹配度排序
 	
 	@ApiModelProperty(value = "区域信息")
 	public String getLocation() {
@@ -62,7 +62,7 @@ public class ShopSerchModel extends BaseSerchModel {
 	public void setOpen_flag(Integer open_flag) {
 		this.open_flag = open_flag;
 	}
-	@ApiModelProperty(value = "排序方式")
+	@ApiModelProperty(value = "排序规则-->> 0距离排序，1评分排序 。默认搜索不传，按照匹配度排序")
 	public Integer getSort_flag() {
 		return sort_flag;
 	}
