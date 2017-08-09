@@ -91,7 +91,6 @@ public class V2CommodityAppSerchApiController {
 			}
 			//是否包邮逻辑处理
 			if (body.getShip_flag() == 1) {
-				
 				qb1.must(QueryBuilders.matchQuery("is_free",1));
 				
 				if (StringUtils.isBlank(body.getDis_area_code())) {
@@ -100,8 +99,8 @@ public class V2CommodityAppSerchApiController {
 					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
 				}
 			}else{
-				 if (StringUtils.isNotBlank(body.getDis_area_code())) {
-					 qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+				if (StringUtils.isNotBlank(body.getDis_area_code())) {
+					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
 				}
 			}
 			//折扣类型
@@ -215,17 +214,15 @@ public class V2CommodityAppSerchApiController {
 			}
 			//是否包邮逻辑处理
 			if (body.getShip_flag() == 1) {
-				
 				qb1.must(QueryBuilders.matchQuery("is_free",1));
-				
 				if (StringUtils.isBlank(body.getDis_area_code())) {
 					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
 				} else {
 					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
 				}
 			}else{
-				 if (StringUtils.isNotBlank(body.getDis_area_code())) {
-					 qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+				if (StringUtils.isNotBlank(body.getDis_area_code())) {
+					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
 				}
 			}
 			//折扣类型

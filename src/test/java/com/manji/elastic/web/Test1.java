@@ -31,7 +31,6 @@ public class Test1 {
 			ss.chineseSearch("母乳保鲜储奶袋", null);
 			//ss.chineseWithEnglishOrPinyinSearch("母乳保鲜储奶袋", null);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -135,14 +134,13 @@ public class Test1 {
 		}
 		QueryBuilder queryBuilder=disMaxQueryBuilder;
 		//关键如果有中文，则必须包含在内容中
-		/*if(StringUtils.isNotBlank(startChineseString)){
-			
+		if(StringUtils.isNotBlank(startChineseString)){
 			queryBuilder=QueryBuilders.filteredQuery(disMaxQueryBuilder,
 					FilterBuilders.queryFilter(QueryBuilders.queryStringQuery("*"+startChineseString+"*").field("article_category_index").analyzer("ngramSearchAnalyzer")));
 			
 			queryBuilder=QueryBuilders.functionScoreQuery(queryBuilder)
 					.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("article_category_index",startChineseString).analyzer("ngramSearchAnalyzer")), ScoreFunctionBuilders.weightFactorFunction(1.5f));
-		}*/
+		}
 		//创建搜索条件
 		SearchRequestBuilder requestBuider = client.prepareSearch("test");
 		requestBuider.setTypes("info");
