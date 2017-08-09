@@ -144,7 +144,7 @@ public class V2ShopAppSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("签约商家结果:" + JSON.toJSONString(hits).toString());
+			
 			//搜索签约商家完毕。处理数据不够，抓取数据来凑
 			int end =body.getPageNum()* body.getSize();
 			int signCount = (int) hits.getTotalHits();
@@ -183,11 +183,11 @@ public class V2ShopAppSerchApiController {
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
-			
 			//默认匹配度排序无距离，单独处理距离信息
 			if(null == body.getSort_flag()){
 				hits = DistanceDoUtils.computerJl(body.getLocation(), hits);
 			}
+			logger.info("商家查询结果:" + JSON.toJSONString(hits).toString());
 			baseResult.setResult(hits);
 		}catch (BusinessDealException e) {
 			logger.error("业务处理异常， 错误信息：{}", e.getMessage());

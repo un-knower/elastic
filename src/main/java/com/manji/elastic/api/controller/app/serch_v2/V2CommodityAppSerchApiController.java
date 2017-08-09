@@ -2,6 +2,8 @@ package com.manji.elastic.api.controller.app.serch_v2;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,11 +14,14 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.DisMaxQueryBuilder;
+import org.elasticsearch.index.query.InnerHitBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.collapse.CollapseBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
@@ -72,9 +77,9 @@ public class V2CommodityAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
 				//以关键字开头(优先级最高)
-				MatchQueryBuilder q1=QueryBuilders.matchQuery("article_category_index",body.getQueryStr()).boost(5);
+				MatchQueryBuilder q1=QueryBuilders.matchQuery("article_title",body.getQueryStr()).boost(5);
 				//完整包含经过分析过的关键字
-				QueryBuilder q2=QueryBuilders.matchQuery("article_category_index.IKS", body.getQueryStr()).minimumShouldMatch("100%");
+				QueryBuilder q2=QueryBuilders.matchQuery("article_title.IKS", body.getQueryStr()).minimumShouldMatch("100%");
 				disMaxQueryBuilder.add(q1);
 				disMaxQueryBuilder.add(q2);
 				qb1.must(disMaxQueryBuilder);
@@ -83,17 +88,32 @@ public class V2CommodityAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getCate_id())){
 				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
 			}
-			//是否包邮
-			if(null != body.getShip_flag()){
+			//是否包邮逻辑处理
+			if (body.getShip_flag() == 1) {
+				
 				qb1.must(QueryBuilders.matchQuery("is_free",1));
+				
+				if (StringUtils.isBlank(body.getDis_area_code())) {
+					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
+				} else {
+					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+				}
+			}else{
+				 if (StringUtils.isNotBlank(body.getDis_area_code())) {
+					 qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+				}
 			}
 			//折扣类型
 			if(null != body.getSale_flag()){
 				qb1.must(QueryBuilders.matchQuery("case_article_activity_type",body.getSale_flag()));
 			}
-			//区域Code
+			//商家区域
 			if(StringUtils.isNotBlank(body.getArea_code())){
-				qb1.must(QueryBuilders.matchQuery("article_distribution_area",body.getArea_code()));
+				qb1.must(QueryBuilders.matchQuery("left_shop_send_area",body.getArea_code()));
+			}
+			// 品牌ID
+			if (StringUtils.isNotBlank(body.getBrand_code())) {
+				qb1.must(QueryBuilders.matchQuery("article_brand_id",body.getBrand_code()));
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
@@ -114,12 +134,149 @@ public class V2CommodityAppSerchApiController {
 				if(3 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
 				}
+				if(4 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_review_score").order(SortOrder.DESC);
+				}
+				if(5 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_order_times").order(SortOrder.DESC);
+				}
 			}
 			//创建搜索条件
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
 			requestBuider.setTypes("info");
 			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
 			requestBuider.setQuery(qb1);
+			if(null != sortBuilder){
+				requestBuider.addSort(sortBuilder);
+			}
+			requestBuider.setFrom((body.getPageNum() - 1) * body.getSize()).setSize(body.getSize());
+			logger.info("参数json:{}",requestBuider.toString());
+			//执行查询结果
+			SearchResponse searchResponse = requestBuider.get();
+			SearchHits hits = searchResponse.getHits();
+			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
+				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
+			}
+			baseResult.setResult(hits);
+		}catch (BusinessDealException e) {
+			logger.error("业务处理异常， 错误信息：{}", e.getMessage());
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.BUSSINESS_HANDLE_ERROR.getCode(), e.getMessage());
+		}catch (NotFoundException e) {
+			logger.error("未找到， 错误信息：{}", e.getMessage());
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.NOT_FOUND.getCode(), e.getMessage());
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error("系统异常，{}", e.getMessage());
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw, true));
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.SYSTEM_ERROR.getCode(), "系统异常" , sw.toString());
+		}
+		return baseResult;
+	}
+	/**
+	 * 商家类查询
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@ApiOperation(value = "商家类查询", notes = "商家类查询"
+			+ "<h3 style='color:red'>状态码说明</h3>"
+			+ "<br/>		10000---成功搜索出商品有结果"
+			+ "<br/>		10001---拿后端返回的message提示一下即可"
+			+ "<br/>		10004---抱歉，没有找到“关键词”的搜索结果")
+	@RequestMapping(value="/commodityGroupShop", method = {RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public BaseObjectResult<SearchHits> commodityGroupShop(HttpServletRequest req, @RequestBody CommoditySerchModel body){
+		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
+		try{
+			//连接服务端
+			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
+			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
+			//关键字处理
+			if (StringUtils.isNotBlank(body.getQueryStr())) {
+				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
+				//以关键字开头(优先级最高)
+				MatchQueryBuilder q1=QueryBuilders.matchQuery("shop_name",body.getQueryStr()).boost(5);
+				//完整包含经过分析过的关键字
+				QueryBuilder q2=QueryBuilders.matchQuery("shop_name.IKS", body.getQueryStr()).minimumShouldMatch("100%");
+				disMaxQueryBuilder.add(q1);
+				disMaxQueryBuilder.add(q2);
+				qb1.must(disMaxQueryBuilder);
+			
+			}
+			//分类ID
+			if(StringUtils.isNotBlank(body.getCate_id())){
+				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+			}
+			// 商家分类
+			if (StringUtils.isNotBlank(body.getShop_cate_id())) {
+				qb1.must(QueryBuilders.matchQuery("scope_values",body.getShop_cate_id()));
+			}
+			//是否包邮逻辑处理
+			if (body.getShip_flag() == 1) {
+				
+				qb1.must(QueryBuilders.matchQuery("is_free",1));
+				
+				if (StringUtils.isBlank(body.getDis_area_code())) {
+					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
+				} else {
+					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+				}
+			}else{
+				 if (StringUtils.isNotBlank(body.getDis_area_code())) {
+					 qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+				}
+			}
+			//折扣类型
+			if(null != body.getSale_flag()){
+				qb1.must(QueryBuilders.matchQuery("case_article_activity_type",body.getSale_flag()));
+			}
+			//商家区域
+			if(StringUtils.isNotBlank(body.getArea_code())){
+				qb1.must(QueryBuilders.matchQuery("left_shop_send_area",body.getArea_code()));
+			}
+			// 品牌ID
+			if (StringUtils.isNotBlank(body.getBrand_code())) {
+				qb1.must(QueryBuilders.matchQuery("article_brand_id",body.getBrand_code()));
+			}
+			//价格区间处理
+			qb1.filter(body.getPrice_end() != null ? 
+					QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()).lt(body.getPrice_end()) 
+					: QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()));
+			//排序处理
+			FieldSortBuilder sortBuilder = null ;
+			if(null != body.getSort_flag()){
+				if(0 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
+				}
+				if(1 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
+				}
+				if(2 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
+				}
+				if(3 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+				}
+				if(4 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_review_score").order(SortOrder.DESC);
+				}
+				if(5 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_order_times").order(SortOrder.DESC);
+				}
+			}
+			//collapse构建
+			List<SortBuilder<?>> sorts = new ArrayList<SortBuilder<?>>();
+			SortBuilder<?> sort = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
+			sorts.add(sort);
+			CollapseBuilder collapse = new CollapseBuilder("shop_id");
+			collapse.setInnerHits(new InnerHitBuilder().setSize(2).setName("top_rated").setSorts(sorts));
+			//创建搜索条件
+			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
+			requestBuider.setTypes("info");
+			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
+			requestBuider.setQuery(qb1);
+			requestBuider.setCollapse(collapse);
 			if(null != sortBuilder){
 				requestBuider.addSort(sortBuilder);
 			}
@@ -171,9 +328,9 @@ public class V2CommodityAppSerchApiController {
 				//qb1.must(QueryBuilders.matchQuery("article_category_index",body.getQueryStr()));
 				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
 				//以关键字开头(优先级最高)
-				MatchQueryBuilder q1=QueryBuilders.matchQuery("article_category_index",body.getQueryStr()).boost(5);
+				MatchQueryBuilder q1=QueryBuilders.matchQuery("article_title",body.getQueryStr()).boost(5);
 				//完整包含经过分析过的关键字
-				QueryBuilder q2=QueryBuilders.matchQuery("article_category_index.IKS", body.getQueryStr()).minimumShouldMatch("100%");
+				QueryBuilder q2=QueryBuilders.matchQuery("article_title.IKS", body.getQueryStr()).minimumShouldMatch("100%");
 				disMaxQueryBuilder.add(q1);
 				disMaxQueryBuilder.add(q2);
 				qb1.must(disMaxQueryBuilder);

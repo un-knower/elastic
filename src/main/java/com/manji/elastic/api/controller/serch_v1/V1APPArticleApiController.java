@@ -53,7 +53,7 @@ public class V1APPArticleApiController {
 			int from = (query.getPageNum() - 1) * query.getSize();
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
 			// 关键字+分类ID
-			if (!"".equals(query.getQueryStr()) && !"".equals(query.getCate_id())) {
+			/*if (!"".equals(query.getQueryStr()) && !"".equals(query.getCate_id())) {
 
 				sb.append("{ \"match\": { \"article_category_index\": \"" + query.getQueryStr()
 						+ "\" } },{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
@@ -65,6 +65,10 @@ public class V1APPArticleApiController {
 
 					sb.append("{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
 				}
+			}*/
+			if (!"".equals(query.getQueryStr())) {
+//				sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr() + "\" } }");
+				sb.append("{ \"match\": { \"shop_name\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
 			}
 			if (query.getShip_flag() != 0) {
 
@@ -306,6 +310,8 @@ public class V1APPArticleApiController {
 			}
 			// 分页
 			sb.append(",\"size\": " + query.getSize() + ",\"from\": " + from + "}}");
+			
+			System.out.println("-------------条件"+sb.toString().replace("must\": [,", "must\": ["));
 			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
 			JSONObject jsonObj = JSON.parseObject(esReturn);  
 			JSONObject result = (JSONObject) jsonObj.get("hits");

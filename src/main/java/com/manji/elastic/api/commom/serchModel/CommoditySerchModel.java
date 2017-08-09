@@ -11,8 +11,9 @@ public class CommoditySerchModel extends BaseSerchModel {
 	private Integer sale_flag;///折扣类型，01
 	private Integer price_start = 0; //筛选初始金额
 	private Integer price_end;//筛选结束金额 ，默认不传。
+	private String shop_cate_id ;//商家分类ID
 	//包邮特殊逻辑
-	private Integer ship_flag;//是否包邮，默认为0，1为包邮
+	private Integer ship_flag=0;//是否包邮，默认为0，1为包邮
 	private String dis_area_code;//配送地区
 	//排序方式
 	private Integer sort_flag;//默认不传匹配排序>>>0综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序
@@ -58,6 +59,13 @@ public class CommoditySerchModel extends BaseSerchModel {
 	}
 	public void setPrice_end(Integer price_end) {
 		this.price_end = price_end;
+	}
+	@ApiModelProperty(value = "商家分类ID")
+	public String getShop_cate_id() {
+		return shop_cate_id;
+	}
+	public void setShop_cate_id(String shop_cate_id) {
+		this.shop_cate_id = shop_cate_id;
 	}
 	@ApiModelProperty(value = "是否包邮，0不包邮，1为包邮")
 	public Integer getShip_flag() {

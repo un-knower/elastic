@@ -1,8 +1,12 @@
 package com.manji.elastic.api.controller.app.serch_v2;
 
+import org.elasticsearch.common.joda.FormatDateTimeFormatter;
+import org.elasticsearch.common.joda.Joda;
+import org.elasticsearch.search.DocValueFormat;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.SearchSortValues;
+import org.joda.time.DateTimeZone;
 
 import com.manji.elastic.common.util.PointToDistance;
 
@@ -21,9 +25,18 @@ public class DistanceDoUtils {
 			//计算距离
 			double juli = PointToDistance.distanceOfTwoPoints(location, thisLatLng);
 			//设置进去
-			String[] sortValues = {String.valueOf(juli)}; 
-			SearchSortValues aa = new SearchSortValues(sortValues, null);
-			arry.sortValues(aa);
+			Object[] sortValues = {juli};
+			try{
+				//FormatDateTimeFormatter formatter = Joda.forPattern("dateOptionalTime");
+				
+				DocValueFormat format = new DocValueFormat.Decimal("666.6666");//.DateTime(formatter, DateTimeZone.UTC);
+				
+				DocValueFormat[] sortValueFormats ={format};
+				
+				arry.sortValues(new SearchSortValues(sortValues, sortValueFormats));
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		return hits;
 	}
