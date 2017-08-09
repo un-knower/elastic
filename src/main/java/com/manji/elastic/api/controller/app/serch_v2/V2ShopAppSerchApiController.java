@@ -35,6 +35,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.manji.elastic.api.commom.serchModel.ShopSerchModel;
 import com.manji.elastic.api.commom.utils.AreaCodeUtil;
+import com.manji.elastic.api.commom.utils.DistanceDoUtils;
+import com.manji.elastic.api.commom.utils.KeySerchBuider;
 import com.manji.elastic.biz.helper.ElasticsearchClientUtils;
 import com.manji.elastic.common.exception.BusinessDealException;
 import com.manji.elastic.common.exception.NotFoundException;
@@ -83,14 +85,15 @@ public class V2ShopAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
+				/*DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
 				//以关键字开头(优先级最高)
 				MatchQueryBuilder q1=QueryBuilders.matchQuery("name",body.getQueryStr()).boost(5);
 				//完整包含经过分析过的关键字
 				QueryBuilder q2=QueryBuilders.matchQuery("name.IKS", body.getQueryStr()).minimumShouldMatch("100%");
 				disMaxQueryBuilder.add(q1);
 				disMaxQueryBuilder.add(q2);
-				qb1.must(disMaxQueryBuilder);
+				qb1.must(disMaxQueryBuilder);*/
+				qb1.must(KeySerchBuider.getChniseBulider("name", body.getQueryStr()));
 			}
 			// 商家主营分类
 			if(StringUtils.isNotBlank(body.getBusy_id())){

@@ -28,8 +28,8 @@ public class Test1 {
 	public static void main(String[] args) {
 		Test1 ss = new Test1();
 		try {
-			//ss.chineseSearch("婚房婚庆婚礼", null);
-			ss.chineseWithEnglishOrPinyinSearch("南京", null);
+			ss.chineseSearch("母乳保鲜储奶袋", null);
+			//ss.chineseWithEnglishOrPinyinSearch("母乳保鲜储奶袋", null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class Test1 {
 		//完整包含经过分析过的关键字
 		//boolean  whitespace=key.contains(" ");
 		//int slop=whitespace?50:5;
-		QueryBuilder q2=QueryBuilders.matchQuery("article_category_index.IKS", key).minimumShouldMatch("100%");
+		QueryBuilder q2=QueryBuilders.matchQuery("article_category_index.ik", key).minimumShouldMatch("100%");
 		disMaxQueryBuilder.add(q1);
 		disMaxQueryBuilder.add(q2);
 		
@@ -85,7 +85,7 @@ public class Test1 {
 		 * 源值搜索，不做拼音转换    
 		 * 权重* 1.5
 		 */        
-		QueryBuilder normSearchBuilder=QueryBuilders.matchQuery("article_category_index",key).boost(5f);
+		QueryBuilder normSearchBuilder=QueryBuilders.matchQuery("article_title",key).boost(5f);
 		/**
 		 * 拼音简写搜索
 		 * 1、分析key，转换为简写  case:  南京东路==>njdl，南京dl==>njdl，njdl==>njdl
@@ -95,14 +95,14 @@ public class Test1 {
 		 */
 		//String analysisKey=commonSearchService.anaysisKeyAndGetMaxWords(SearchIndex.INDEX_NAME_SEARCHWORDSSTATISTICS,key,"pinyiSimpleSearchAnalyzer");
 		String analysisKey = Pinyin4j.getFirstSpell(key);
-		QueryBuilder pingYinSampleQueryBuilder=QueryBuilders.termQuery("article_category_index.SPY", analysisKey);
+		QueryBuilder pingYinSampleQueryBuilder=QueryBuilders.termQuery("article_title.pinyin", analysisKey);
 		/**
 		 * 拼音简写包含匹配，如 njdl可以查出 "城市公牛 南京东路店"，虽然非南京东路开头
 		 * 权重*0.8
 		 */
 		QueryBuilder  pingYinSampleContainQueryBuilder=null;
 		if(analysisKey.length()>1){
-			pingYinSampleContainQueryBuilder=QueryBuilders.wildcardQuery("article_category_index.SPY", "*"+analysisKey+"*").boost(0.8f);
+			pingYinSampleContainQueryBuilder=QueryBuilders.wildcardQuery("article_title.pinyin", "*"+analysisKey+"*").boost(0.8f);
 		}
 
 		/**
@@ -114,14 +114,14 @@ public class Test1 {
 		 */
 		QueryBuilder pingYinFullQueryBuilder=null;
 		if(key.length()>1){
-			pingYinFullQueryBuilder=QueryBuilders.matchPhraseQuery("article_category_index.FPY", key);    
+			pingYinFullQueryBuilder=QueryBuilders.matchPhraseQuery("article_title.pinyin", key);    
 		}
 
 		/**
 		 * 完整包含关键字查询(优先级最低，只有以上四种方式查询无结果时才考虑）
 		 * 权重*0.8
 		 */
-		QueryBuilder containSearchBuilder=QueryBuilders.matchQuery("article_category_index.IKS", key).minimumShouldMatch("100%");
+		QueryBuilder containSearchBuilder=QueryBuilders.matchQuery("article_title.ik", key).minimumShouldMatch("100%");
 		disMaxQueryBuilder
 		.add(normSearchBuilder)
 		.add(pingYinSampleQueryBuilder)    
@@ -144,7 +144,7 @@ public class Test1 {
 					.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("article_category_index",startChineseString).analyzer("ngramSearchAnalyzer")), ScoreFunctionBuilders.weightFactorFunction(1.5f));
 		}*/
 		//创建搜索条件
-		SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
+		SearchRequestBuilder requestBuider = client.prepareSearch("test");
 		requestBuider.setTypes("info");
 		requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
 		requestBuider.setQuery(queryBuilder);

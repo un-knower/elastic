@@ -1,4 +1,4 @@
-package com.manji.elastic.api.controller.app.serch_v2;
+package com.manji.elastic.api.commom.utils;
 
 import org.elasticsearch.common.joda.FormatDateTimeFormatter;
 import org.elasticsearch.common.joda.Joda;
