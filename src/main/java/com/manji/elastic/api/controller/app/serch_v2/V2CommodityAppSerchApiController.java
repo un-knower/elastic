@@ -13,10 +13,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.DisMaxQueryBuilder;
 import org.elasticsearch.index.query.InnerHitBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.collapse.CollapseBuilder;
@@ -71,18 +68,12 @@ public class V2CommodityAppSerchApiController {
 	public BaseObjectResult<SearchHits> queryCommodity(HttpServletRequest req, @RequestBody CommoditySerchModel body){
 		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
+			long startTime = System.currentTimeMillis();
 			//连接服务端
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字处理
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				/*DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
-				//以关键字开头(优先级最高)
-				MatchQueryBuilder q1=QueryBuilders.matchQuery("article_title",body.getQueryStr()).boost(5);
-				//完整包含经过分析过的关键字
-				QueryBuilder q2=QueryBuilders.matchQuery("article_title.IKS", body.getQueryStr()).minimumShouldMatch("100%");
-				disMaxQueryBuilder.add(q1);
-				disMaxQueryBuilder.add(q2);*/
 				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getQueryStr()));
 			}
 			//分类ID
@@ -155,6 +146,8 @@ public class V2CommodityAppSerchApiController {
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
 			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			long endTime = System.currentTimeMillis();
+			logger.info("综合商品查询--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
@@ -189,20 +182,13 @@ public class V2CommodityAppSerchApiController {
 	public BaseObjectResult<SearchHits> commodityGroupShop(HttpServletRequest req, @RequestBody CommoditySerchModel body){
 		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
+			long startTime = System.currentTimeMillis();
 			//连接服务端
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字处理
 			if (StringUtils.isNotBlank(body.getQueryStr())) {
-				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
-				//以关键字开头(优先级最高)
-				MatchQueryBuilder q1=QueryBuilders.matchQuery("shop_name",body.getQueryStr()).boost(5);
-				//完整包含经过分析过的关键字
-				QueryBuilder q2=QueryBuilders.matchQuery("shop_name.IKS", body.getQueryStr()).minimumShouldMatch("100%");
-				disMaxQueryBuilder.add(q1);
-				disMaxQueryBuilder.add(q2);
-				qb1.must(disMaxQueryBuilder);
-			
+				qb1.must(KeySerchBuider.getChniseBulider("shop_name", body.getQueryStr()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
@@ -284,6 +270,8 @@ public class V2CommodityAppSerchApiController {
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
 			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			long endTime = System.currentTimeMillis();
+			logger.info("商家类查询--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
@@ -318,20 +306,17 @@ public class V2CommodityAppSerchApiController {
 	public BaseObjectResult<SearchHits> commodityOfShop(HttpServletRequest req,@RequestBody ShopCommoditySerchModel body){
 		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
+			long startTime = System.currentTimeMillis();
+			//参数校验
+			if(null == body.getShop_Id()){
+				throw new BusinessDealException("商家ID参数必传");
+			}
 			//连接服务端
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				//qb1.must(QueryBuilders.matchQuery("article_category_index",body.getQueryStr()));
-				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
-				//以关键字开头(优先级最高)
-				MatchQueryBuilder q1=QueryBuilders.matchQuery("article_title",body.getQueryStr()).boost(5);
-				//完整包含经过分析过的关键字
-				QueryBuilder q2=QueryBuilders.matchQuery("article_title.IKS", body.getQueryStr()).minimumShouldMatch("100%");
-				disMaxQueryBuilder.add(q1);
-				disMaxQueryBuilder.add(q2);
-				qb1.must(disMaxQueryBuilder);
+				qb1.must(KeySerchBuider.getChniseBulider("article_category_index", body.getQueryStr()));
 			}
 			//商家分类
 			if(StringUtils.isNotBlank(body.getShop_cate_id())){
@@ -340,9 +325,6 @@ public class V2CommodityAppSerchApiController {
 			//折扣
 			if(StringUtils.isNotBlank(body.getAct_flag())){
 				qb1.must(QueryBuilders.matchQuery("article_activity_type",body.getAct_flag()));
-			}
-			if(null == body.getShop_Id()){
-				throw new BusinessDealException("商家ID参数必传");
 			}
 			//商家ID
 			qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_Id()));
@@ -377,6 +359,8 @@ public class V2CommodityAppSerchApiController {
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
 			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			long endTime = System.currentTimeMillis();
+			logger.info("商家店铺中搜索商品--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
@@ -418,6 +402,7 @@ public class V2CommodityAppSerchApiController {
 			if(null == size){
 				size = 20;
 			}
+			long startTime = System.currentTimeMillis();
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
 			requestBuider.setTypes("info");
@@ -431,6 +416,8 @@ public class V2CommodityAppSerchApiController {
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
 			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			long endTime = System.currentTimeMillis();
+			logger.info("好货列表--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
@@ -472,6 +459,7 @@ public class V2CommodityAppSerchApiController {
 			}if(null == size){
 				size = 20;
 			}
+			long startTime = System.currentTimeMillis();
 			//查询当前商品是什么分类的
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
@@ -507,6 +495,8 @@ public class V2CommodityAppSerchApiController {
 			SearchResponse searchResponse1 = requestBuider1.get();
 			SearchHits hits1 = searchResponse1.getHits();
 			logger.info("结果:" + JSON.toJSONString(hits1).toString());
+			long endTime = System.currentTimeMillis();
+			logger.info("同类推荐--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits1 || hits1.getHits() == null || hits1.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}

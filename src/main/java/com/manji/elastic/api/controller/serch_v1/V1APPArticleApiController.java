@@ -68,7 +68,7 @@ public class V1APPArticleApiController {
 			}*/
 			if (!"".equals(query.getQueryStr())) {
 //				sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr() + "\" } }");
-				sb.append("{ \"match\": { \"shop_name\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
+				sb.append("{ \"match\": { \"article_title\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
 			}
 			if (query.getShip_flag() != 0) {
 

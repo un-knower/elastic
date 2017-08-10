@@ -11,15 +11,11 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import com.manji.elastic.common.global.Configure;
 
 @SuppressWarnings("resource")
-public class ElasticsearchClientUtils {
+public class ElasticsearchClientUtilsSS {
 	
 	public static TransportClient client = null;
 	
-	/**
-	 * 获得链接
-	 * @return
-	 */
-	public static TransportClient getTranClinet(){
+	static{
 		if(null == client){
 			// 设置集群名称
 			Settings settings = Settings.builder().put("cluster.name", "mj-es").build();
@@ -35,32 +31,12 @@ public class ElasticsearchClientUtils {
 			}
 			System.out.println("创建连接成功~~~~~~~~~~~~~~~");
 		}
+	}
+	/**
+	 * 获得链接
+	 * @return
+	 */
+	public static TransportClient getTranClinet(){
 		return client;
-	}
-	/**
-	 * 关闭连接
-	 */
-	public static void stopClient(){
-		if(null != client){
-			try{
-				client.close();
-			}catch(Exception e){
-				
-			}finally {
-				client = null;
-			}
-		}
-	}
-	/**
-	 * 重新开启连接
-	 */
-	public static void startClient(){
-		try{
-			stopClient();
-		}catch(Exception e){
-			
-		}finally {
-			getTranClinet();
-		}
 	}
 }

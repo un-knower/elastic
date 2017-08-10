@@ -65,7 +65,7 @@ public class V2CommodityPcSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(QueryBuilders.matchQuery("article_category_index",body.getQueryStr()));
+				qb1.must(QueryBuilders.matchQuery("article_title",body.getQueryStr()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
@@ -82,6 +82,12 @@ public class V2CommodityPcSerchApiController {
 			//区域Code
 			if(StringUtils.isNotBlank(body.getArea_code())){
 				qb1.must(QueryBuilders.matchQuery("article_distribution_area",body.getArea_code()));
+			}
+			//处理规格list
+			if(null != body.getSpecs() && body.getSpecs().size() > 0){
+				for (Long spe : body.getSpecs()) {
+					qb1.must(QueryBuilders.matchQuery("待定~~~~~~~",spe));
+				}
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 

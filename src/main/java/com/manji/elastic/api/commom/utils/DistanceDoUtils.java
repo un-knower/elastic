@@ -1,12 +1,9 @@
 package com.manji.elastic.api.commom.utils;
 
-import org.elasticsearch.common.joda.FormatDateTimeFormatter;
-import org.elasticsearch.common.joda.Joda;
 import org.elasticsearch.search.DocValueFormat;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.SearchSortValues;
-import org.joda.time.DateTimeZone;
 
 import com.manji.elastic.common.util.PointToDistance;
 

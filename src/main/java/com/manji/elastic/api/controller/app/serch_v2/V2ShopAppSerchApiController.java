@@ -14,8 +14,6 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.geo.GeoDistance;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.DisMaxQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -80,19 +78,12 @@ public class V2ShopAppSerchApiController {
 			if(StringUtils.isBlank(lat) || StringUtils.isBlank(lon)){
 				throw new BusinessDealException("获取位置信息失败~~~");
 			}
+			long startTime = System.currentTimeMillis();
 			//连接服务端
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				/*DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
-				//以关键字开头(优先级最高)
-				MatchQueryBuilder q1=QueryBuilders.matchQuery("name",body.getQueryStr()).boost(5);
-				//完整包含经过分析过的关键字
-				QueryBuilder q2=QueryBuilders.matchQuery("name.IKS", body.getQueryStr()).minimumShouldMatch("100%");
-				disMaxQueryBuilder.add(q1);
-				disMaxQueryBuilder.add(q2);
-				qb1.must(disMaxQueryBuilder);*/
 				qb1.must(KeySerchBuider.getChniseBulider("name", body.getQueryStr()));
 			}
 			// 商家主营分类
@@ -191,6 +182,8 @@ public class V2ShopAppSerchApiController {
 				hits = DistanceDoUtils.computerJl(body.getLocation(), hits);
 			}
 			logger.info("商家查询结果:" + JSON.toJSONString(hits).toString());
+			long endTime = System.currentTimeMillis();
+			logger.info("商家综合查询--搜索耗时：" + (endTime - startTime) + "ms");
 			baseResult.setResult(hits);
 		}catch (BusinessDealException e) {
 			logger.error("业务处理异常， 错误信息：{}", e.getMessage());
@@ -224,20 +217,13 @@ public class V2ShopAppSerchApiController {
 			}
 			int len = area_code.length();
 			String areaCode = AreaCodeUtil.doACode(area_code, len);
+			long startTime = System.currentTimeMillis();
 			//连接服务端
 			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				//qb1.must(QueryBuilders.matchQuery("shopinfo_index",body.getQueryStr()));
-				DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
-				//以关键字开头(优先级最高)
-				MatchQueryBuilder q1=QueryBuilders.matchQuery("name",body.getQueryStr()).boost(5);
-				//完整包含经过分析过的关键字
-				QueryBuilder q2=QueryBuilders.matchQuery("name.IKS", body.getQueryStr()).minimumShouldMatch("100%");
-				disMaxQueryBuilder.add(q1);
-				disMaxQueryBuilder.add(q2);
-				qb1.must(disMaxQueryBuilder);
+				qb1.must(KeySerchBuider.getChniseBulider("name", body.getQueryStr()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
@@ -261,6 +247,8 @@ public class V2ShopAppSerchApiController {
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
 			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			long endTime = System.currentTimeMillis();
+			logger.info("推荐商家--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
