@@ -53,34 +53,39 @@ public class V1APPArticleApiController {
 			int from = (query.getPageNum() - 1) * query.getSize();
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
 			// 关键字+分类ID
-			/*if (!"".equals(query.getQueryStr()) && !"".equals(query.getCate_id())) {
-
-				sb.append("{ \"match\": { \"article_category_index\": \"" + query.getQueryStr()
-						+ "\" } },{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
-			} else {
-				if (!"".equals(query.getQueryStr())) {
-					sb.append("{ \"match\": { \"article_category_index\": \"" + query.getQueryStr() + "\" } }");
-				}
-				if (!"".equals(query.getCate_id())) {
-
-					sb.append("{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
-				}
-			}*/
 			if (!"".equals(query.getQueryStr())) {
-//				sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr() + "\" } }");
+				//sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr() + "\" } }");
 				sb.append("{ \"match\": { \"article_title\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
 			}
-			if (query.getShip_flag() != 0) {
-
+			if (!"".equals(query.getCate_id())) {
+				
+				sb.append(",{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
+			}
+			// 是否包邮逻辑段
+			if (query.getShip_flag() == 1) {
 				sb.append(",{ \"match\": { \"is_free\": \"" + query.getShip_flag() + "\" } }");
+				if (!"".equals(query.getDis_area_code())) {
+					sb.append(",{ \"match\": { \"article_freeshipping_area\": \"" + "1 " + query.getDis_area_code()
+							+ "\" } }");
+				} else {
+					sb.append(",{ \"match\": { \"article_freeshipping_area\": \"" + "1 " + "\" } }");
+				}
+				// sb.append(",{ \"match\": { \"article_freeshipping_area\": \"" +
+				// query.getDis_area_code() + "\" } }");
+			} else if (!"".equals(query.getDis_area_code())) {
+				sb.append(",{ \"match\": { \"article_distribution_area\": \"" + "1 " + query.getDis_area_code() + "\" } }");
 			}
-			if(query.getSale_flag() !=0){
-				
-				sb.append(",{ \"match\": { \"case_article_activity_type\": \""+query.getSale_flag()+"\" } }");
+			// 折扣
+			if (query.getSale_flag() != 0) {
+				sb.append(",{ \"match\": { \"article_activity_type\": \"" + "1 2 3 4 5 6 7 8" + "\" } }");
 			}
-			if(!"".equals(query.getArea_code())){
-				
-				sb.append(",{ \"match\": { \"article_distribution_area\": \"" + "1 " + query.getArea_code() + "\" } }");
+			// 商家区域
+			if (!"".equals(query.getArea_code())) {
+				sb.append(",{ \"match\": { \"left_shop_send_area\": \"" + query.getArea_code() + "\" } }");
+			}
+			// 品牌ID
+			if ("" != query.getBrand_code()) {
+				sb.append(",{ \"match\": { \"article_brand_id\": \"" + query.getBrand_code() + "\" } }");
 			}
 			sb.append("]");
 			// 商品价格过滤
@@ -115,8 +120,7 @@ public class V1APPArticleApiController {
 			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
 			JSONObject jsonObj = JSON.parseObject(esReturn);  
 			JSONObject result = (JSONObject) jsonObj.get("hits");
-			
-	        return result;
+			return result;
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("系统异常，{}", e.getMessage());
@@ -224,27 +228,17 @@ public class V1APPArticleApiController {
 		try{
 			int from = (query.getPageNum() - 1) * query.getSize();
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
-			boolean query_flag = false;
-			// 关键字+分类ID
-			if (!"".equals(query.getQueryStr()) && !"".equals(query.getCate_id())) {
-				sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr()
-						+ "\" } },{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
-				query_flag = true;
-			} else {
-				if (!"".equals(query.getQueryStr())) {
-					sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr() + "\" } }");
-				}
-				if (!"".equals(query.getCate_id())) {
-					sb.append("{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
-				}
-				query_flag = true;
+			if (!"".equals(query.getQueryStr())) {
+				//sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr() + "\" } }");
+				sb.append("{ \"match\": { \"shop_name\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
+			}
+			//分类ID
+			if (!"".equals(query.getCate_id())) {
+				sb.append(",{ \"match\": { \"class_list\": \"" + query.getCate_id() + "\" } }");
 			}
 			// 商家分类
 			if ("" != query.getShop_cate_id()) {
-				if (query_flag) {
-					sb.append(",");
-				}
-				sb.append("{\"match\": { \"scope_values\": \"" + query.getShop_cate_id() + "\" } }");
+				sb.append(",{\"match\": { \"scope_values\": \"" + query.getShop_cate_id() + "\" } }");
 			}
 			// 是否包邮逻辑段
 			if (query.getShip_flag() == 1) {
@@ -310,7 +304,6 @@ public class V1APPArticleApiController {
 			}
 			// 分页
 			sb.append(",\"size\": " + query.getSize() + ",\"from\": " + from + "}}");
-			
 			System.out.println("-------------条件"+sb.toString().replace("must\": [,", "must\": ["));
 			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"article"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
 			JSONObject jsonObj = JSON.parseObject(esReturn);  

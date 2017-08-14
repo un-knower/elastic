@@ -60,7 +60,7 @@ public class V1APPShopApiController {
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
 			// 关键字
 			if (!"".equals(query.getQueryStr())) {
-				sb.append("{ \"match\": { \"shopinfo_index\": \"" + query.getQueryStr() + "\" } }");
+				sb.append("{ \"match\": { \"name\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
 			}
 			// 商家主营分类
 			if (!"".equals(query.getBusy_id())) {
@@ -84,7 +84,7 @@ public class V1APPShopApiController {
 			sb.append("]");
 			// 搜索附近最大区域
 			if (0 == query.getDistance_max()) {
-				sb.append(",\"filter\":{\"geo_distance\":{\"distance\":\"1000m\",\"latlng\":{\"lat\":" + lat + ",\"lon\":"
+				sb.append(",\"filter\":{\"geo_distance\":{\"distance\":\"10000000m\",\"latlng\":{\"lat\":" + lat + ",\"lon\":"
 						+ lon + "}}}");
 			} else {
 				sb.append(",\"filter\":{\"geo_distance\":{\"distance\":\"" + query.getDistance_max()
@@ -102,9 +102,7 @@ public class V1APPShopApiController {
 			}
 			StringBuffer tempSb =sb;
 			sb.append(",\"size\": " + query.getSize() + ",\"from\": " + from + "}");
-			
 			String esReturn = HttpClientUtil.post(Configure.getEsUrl()+"shop"+"/_search", sb.toString().replace("must\": [,", "must\": ["), "application/json", null);
-			
 			JSONObject obj = JSONObject.parseObject(esReturn);
 			JSONObject returnObj = obj.getJSONObject("hits");
 			//签约商家查询完毕

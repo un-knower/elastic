@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.manji.elastic.api.commom.serchModel.CommoditySerchModel;
+import com.manji.elastic.api.commom.serchModel.AppCommoditySerchModel;
 import com.manji.elastic.api.commom.serchModel.ShopCommoditySerchModel;
 import com.manji.elastic.api.commom.utils.KeySerchBuider;
 import com.manji.elastic.biz.helper.ElasticsearchClientUtils;
@@ -65,7 +65,7 @@ public class V2CommodityAppSerchApiController {
 			+ "<br/>		10001---拿后端返回的message提示一下即可"
 			+ "<br/>		10004---抱歉，没有找到“关键词”的搜索结果")
 	@RequestMapping(value="/queryCommodity", method = {RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public BaseObjectResult<SearchHits> queryCommodity(HttpServletRequest req, @RequestBody CommoditySerchModel body){
+	public BaseObjectResult<SearchHits> queryCommodity(HttpServletRequest req, @RequestBody AppCommoditySerchModel body){
 		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
 			long startTime = System.currentTimeMillis();
@@ -102,9 +102,9 @@ public class V2CommodityAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getArea_code())){
 				qb1.must(QueryBuilders.matchQuery("left_shop_send_area",body.getArea_code()));
 			}
-			// 品牌ID
-			if (StringUtils.isNotBlank(body.getBrand_code())) {
-				qb1.must(QueryBuilders.matchQuery("article_brand_id",body.getBrand_code()));
+			//处理品牌
+			if(StringUtils.isNotBlank(body.getBrand_code())) {
+				qb1.must(QueryBuilders.matchQuery("article_brand_id", body.getBrand_code()));
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
@@ -179,7 +179,7 @@ public class V2CommodityAppSerchApiController {
 			+ "<br/>		10001---拿后端返回的message提示一下即可"
 			+ "<br/>		10004---抱歉，没有找到“关键词”的搜索结果")
 	@RequestMapping(value="/commodityGroupShop", method = {RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public BaseObjectResult<SearchHits> commodityGroupShop(HttpServletRequest req, @RequestBody CommoditySerchModel body){
+	public BaseObjectResult<SearchHits> commodityGroupShop(HttpServletRequest req, @RequestBody AppCommoditySerchModel body){
 		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
 			long startTime = System.currentTimeMillis();
@@ -219,9 +219,9 @@ public class V2CommodityAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getArea_code())){
 				qb1.must(QueryBuilders.matchQuery("left_shop_send_area",body.getArea_code()));
 			}
-			// 品牌ID
-			if (StringUtils.isNotBlank(body.getBrand_code())) {
-				qb1.must(QueryBuilders.matchQuery("article_brand_id",body.getBrand_code()));
+			//处理品牌
+			if(StringUtils.isNotBlank(body.getBrand_code())) {
+				qb1.must(QueryBuilders.matchQuery("article_brand_id", body.getBrand_code()));
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 

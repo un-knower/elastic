@@ -5,6 +5,8 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
+import com.manji.elastic.common.util.Pinyin4j;
+
 public class KeySerchBuider {
 	
 	/**
@@ -19,8 +21,13 @@ public class KeySerchBuider {
 		MatchQueryBuilder q1=QueryBuilders.matchQuery(key+".raw", value).boost(5);
 		//完整包含经过分析过的关键字
 		QueryBuilder q2=QueryBuilders.matchQuery(key, value).minimumShouldMatch("100%");
+		
+		String analysisKey = Pinyin4j.getFirstSpell(value);
+		QueryBuilder pingYinSampleQueryBuilder=QueryBuilders.termQuery(key+".spy", analysisKey).boost(1);
+		
 		disMaxQueryBuilder.add(q1);
 		disMaxQueryBuilder.add(q2);
+		disMaxQueryBuilder.add(pingYinSampleQueryBuilder);
 		return q2;
 	}
 	/**

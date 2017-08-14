@@ -1,14 +1,12 @@
 package com.manji.elastic.api.commom.serchModel;
 
-import java.util.List;
-
 import com.manji.elastic.api.commom.BaseSerchModel;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-public class CommoditySerchModel extends BaseSerchModel {
+public class AppCommoditySerchModel extends BaseSerchModel {
 	//筛选条件参数
 	private String cate_id;//分类ID
-	private String brand_code;//品牌ID
+	private String brand_code;//多选品牌ID
 	private String area_code;//地区码。
 	private Integer sale_flag;///折扣类型，01
 	private Integer price_start = 0; //筛选初始金额
@@ -19,9 +17,6 @@ public class CommoditySerchModel extends BaseSerchModel {
 	private String dis_area_code;//配送地区
 	//排序方式
 	private Integer sort_flag;//默认不传匹配排序>>>0综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序
-	
-	private List<Long> specs;
-	
 	@ApiModelProperty(value = "分类ID")
 	public String getCate_id() {
 		return cate_id;
@@ -91,12 +86,5 @@ public class CommoditySerchModel extends BaseSerchModel {
 	}
 	public void setSort_flag(Integer sort_flag) {
 		this.sort_flag = sort_flag;
-	}
-	@ApiModelProperty(value = "规格，属性等高级选择list")
-	public List<Long> getSpecs() {
-		return specs;
-	}
-	public void setSpecs(List<Long> specs) {
-		this.specs = specs;
 	}
 }
