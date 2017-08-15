@@ -114,15 +114,26 @@ public class V2CommodityPcSerchApiController {
 					QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()).lt(body.getPrice_end()) 
 					: QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()));
 			//排序处理
-			FieldSortBuilder sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-			if(1 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
-			}
-			if(2 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
-			}
-			if(3 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+			FieldSortBuilder sortBuilder = null ;
+			if(null != body.getSort_flag()){
+				if(0 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
+				}
+				if(1 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
+				}
+				if(2 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
+				}
+				if(3 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+				}
+				if(4 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_review_score").order(SortOrder.DESC);
+				}
+				if(5 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_order_times").order(SortOrder.DESC);
+				}
 			}
 			//创建搜索条件
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
@@ -188,15 +199,26 @@ public class V2CommodityPcSerchApiController {
 				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
 			}
 			//排序处理
-			FieldSortBuilder sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-			if(1 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
-			}
-			if(2 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
-			}
-			if(3 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+			FieldSortBuilder sortBuilder = null ;
+			if(null != body.getSort_flag()){
+				if(0 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
+				}
+				if(1 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
+				}
+				if(2 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
+				}
+				if(3 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+				}
+				if(4 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_review_score").order(SortOrder.DESC);
+				}
+				if(5 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_order_times").order(SortOrder.DESC);
+				}
 			}
 			//创建搜索条件
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
@@ -207,7 +229,7 @@ public class V2CommodityPcSerchApiController {
 			if(null != sortBuilder){
 				requestBuider.addSort(sortBuilder);
 			}
-			requestBuider.setFrom((1 - 1) * 100).setSize(100);
+			requestBuider.setFrom((1 - 1) * 50).setSize(50);
 			logger.info("参数json:{}",requestBuider.toString());
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
@@ -265,18 +287,29 @@ public class V2CommodityPcSerchApiController {
 			qb1.mustNot(QueryBuilders.termQuery("article_brand_id","0"));
 			//首字母
 			if(StringUtils.isNotBlank(body.getFirstZm())) {
-				qb1.must(QueryBuilders.matchQuery("待定 ....",body.getFirstZm()));
+				qb1.must(QueryBuilders.termQuery("article_brand_first_char",body.getFirstZm().toUpperCase()));
 			}
 			//排序处理
-			FieldSortBuilder sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-			if(1 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
-			}
-			if(2 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
-			}
-			if(3 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+			FieldSortBuilder sortBuilder = null ;
+			if(null != body.getSort_flag()){
+				if(0 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
+				}
+				if(1 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
+				}
+				if(2 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
+				}
+				if(3 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+				}
+				if(4 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_review_score").order(SortOrder.DESC);
+				}
+				if(5 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_order_times").order(SortOrder.DESC);
+				}
 			}
 			//创建搜索条件
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
@@ -287,7 +320,7 @@ public class V2CommodityPcSerchApiController {
 			if(null != sortBuilder){
 				requestBuider.addSort(sortBuilder);
 			}
-			requestBuider.setFrom((1 - 1) * 100).setSize(100);
+			requestBuider.setFrom((1 - 1) * 50).setSize(50);
 			logger.info("参数json:{}",requestBuider.toString());
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();

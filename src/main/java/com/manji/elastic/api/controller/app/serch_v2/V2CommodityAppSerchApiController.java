@@ -70,7 +70,7 @@ public class V2CommodityAppSerchApiController {
 		try{
 			long startTime = System.currentTimeMillis();
 			//连接服务端
-			TransportClient  client = ElasticsearchClientUtils.getTranClinet();
+			TransportClient client = ElasticsearchClientUtils.getTranClinet();
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字处理
 			if(StringUtils.isNotBlank(body.getQueryStr())){
