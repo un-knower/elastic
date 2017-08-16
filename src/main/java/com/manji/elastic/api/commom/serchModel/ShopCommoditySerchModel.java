@@ -7,7 +7,7 @@ public class ShopCommoditySerchModel extends BaseSerchModel {
 	//筛选条件参数
 	private String shop_cate_id;//商家分类ID
 	private String act_flag;///折扣类型1、折扣2、满折3、满减劵4、满额返劵5、指定赠6、买赠7、满赠8、包邮
-	private Integer shop_Id;//商家ID
+	private Integer shop_id;//商家ID
 	//排序方式
 	private Integer sort_flag;//不传按照匹配排序，0综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序
 	
@@ -26,11 +26,11 @@ public class ShopCommoditySerchModel extends BaseSerchModel {
 		this.act_flag = act_flag;
 	}
 	@ApiModelProperty(value = "商家ID")
-	public Integer getShop_Id() {
-		return shop_Id;
+	public Integer getShop_id() {
+		return shop_id;
 	}
-	public void setShop_Id(Integer shop_Id) {
-		this.shop_Id = shop_Id;
+	public void setShop_id(Integer shop_id) {
+		this.shop_id = shop_id;
 	}
 	@ApiModelProperty(value = "不传按照匹配排序，0综合排序，1，销量排序，2，按照价格降序排序，3，按照价格升序排序,4按照商家综合排序，5按照商家销量排序")
 	public Integer getSort_flag() {

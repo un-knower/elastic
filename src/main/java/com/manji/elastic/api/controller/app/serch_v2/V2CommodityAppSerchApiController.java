@@ -308,7 +308,7 @@ public class V2CommodityAppSerchApiController {
 		try{
 			long startTime = System.currentTimeMillis();
 			//参数校验
-			if(null == body.getShop_Id()){
+			if(null == body.getShop_id()){
 				throw new BusinessDealException("商家ID参数必传");
 			}
 			//连接服务端
@@ -327,7 +327,7 @@ public class V2CommodityAppSerchApiController {
 				qb1.must(QueryBuilders.matchQuery("article_activity_type",body.getAct_flag()));
 			}
 			//商家ID
-			qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_Id()));
+			qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_id()));
 			//排序处理
 			FieldSortBuilder sortBuilder = null;
 			if(0 == body.getSort_flag()){
