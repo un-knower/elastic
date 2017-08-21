@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.manji.elastic.api.commom.serchModel.AppCommoditySerchModel;
 import com.manji.elastic.api.commom.serchModel.ShopCommoditySerchModel;
 import com.manji.elastic.api.commom.utils.KeySerchBuider;
