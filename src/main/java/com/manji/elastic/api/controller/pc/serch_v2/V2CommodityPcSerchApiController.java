@@ -148,7 +148,7 @@ public class V2CommodityPcSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
@@ -234,7 +234,7 @@ public class V2CommodityPcSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
@@ -325,7 +325,7 @@ public class V2CommodityPcSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}

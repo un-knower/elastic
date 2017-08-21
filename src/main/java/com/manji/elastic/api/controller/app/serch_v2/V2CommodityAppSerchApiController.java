@@ -145,7 +145,7 @@ public class V2CommodityAppSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			long endTime = System.currentTimeMillis();
 			logger.info("综合商品查询--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
@@ -269,7 +269,7 @@ public class V2CommodityAppSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			long endTime = System.currentTimeMillis();
 			logger.info("商家类查询--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
@@ -358,7 +358,7 @@ public class V2CommodityAppSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			long endTime = System.currentTimeMillis();
 			logger.info("商家店铺中搜索商品--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
@@ -415,7 +415,7 @@ public class V2CommodityAppSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			long endTime = System.currentTimeMillis();
 			logger.info("好货列表--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
@@ -494,7 +494,7 @@ public class V2CommodityAppSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse1 = requestBuider1.get();
 			SearchHits hits1 = searchResponse1.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits1).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits1).toString());
 			long endTime = System.currentTimeMillis();
 			logger.info("同类推荐--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits1 || hits1.getHits() == null || hits1.getHits().length == 0){

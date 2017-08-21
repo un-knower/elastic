@@ -181,7 +181,7 @@ public class V2ShopAppSerchApiController {
 			if(null == body.getSort_flag()){
 				hits = DistanceDoUtils.computerJl(body.getLocation(), hits);
 			}
-			logger.info("商家查询结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("商家查询结果:" + JSON.toJSONString(hits).toString());
 			long endTime = System.currentTimeMillis();
 			logger.info("商家综合查询--搜索耗时：" + (endTime - startTime) + "ms");
 			baseResult.setResult(hits);
@@ -246,7 +246,7 @@ public class V2ShopAppSerchApiController {
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
-			logger.info("结果:" + JSON.toJSONString(hits).toString());
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
 			long endTime = System.currentTimeMillis();
 			logger.info("推荐商家--搜索耗时：" + (endTime - startTime) + "ms");
 			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
