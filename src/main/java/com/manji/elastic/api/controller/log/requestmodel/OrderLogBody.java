@@ -2,7 +2,7 @@ package com.manji.elastic.api.controller.log.requestmodel;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-public class OrderAddLogBody {
+public class OrderLogBody {
 	private Long order_id;
 	
 	private String order_no;
@@ -14,6 +14,10 @@ public class OrderAddLogBody {
 	private String event_context;
 	
 	private String remark;
+	
+	private Long back_order_id;
+	
+	private String back_order_no;
 	
 	private String rowAddTime;
 
@@ -66,6 +70,22 @@ public class OrderAddLogBody {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	@ApiModelProperty(value = "退单ID")
+	public Long getBack_order_id() {
+		return back_order_id;
+	}
+
+	public void setBack_order_id(Long back_order_id) {
+		this.back_order_id = back_order_id;
+	}
+	@ApiModelProperty(value = "退单号")
+	public String getBack_order_no() {
+		return back_order_no;
+	}
+
+	public void setBack_order_no(String back_order_no) {
+		this.back_order_no = back_order_no;
+	}
 	@ApiModelProperty(value = "数据添加时间，格式yyyy-MM-dd hh:mm:ss")
 	public String getRowAddTime() {
 		return rowAddTime;
@@ -74,5 +94,4 @@ public class OrderAddLogBody {
 	public void setRowAddTime(String rowAddTime) {
 		this.rowAddTime = rowAddTime;
 	}
-	
 }

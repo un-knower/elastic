@@ -26,8 +26,7 @@ public final class Configure {
 	private static final String ES_shop_extra_IndexAlias  = "ES_shop_extra_IndexAlias";
 	
 	private static final String ES_IndexOrder = "ES_IndexOrder";
-	private static final String ES_typeAddOrder = "ES_typeAddOrder";
-	private static final String ES_typeBackOrder = "ES_typeBackOrder";
+	
 	static {
 		String profiles = System.getProperty("spring.profiles.active", "dev");
 		logger.info("=========================>>>>在什么环境启动？===>"+profiles);
@@ -92,11 +91,5 @@ public final class Configure {
 	}
 	public static String getES_IndexOrder() {
 		return PropertiesUtil.getValue(ES_IndexOrder);
-	}
-	public static String getES_typeAddOrder() {
-		return PropertiesUtil.getValue(ES_typeAddOrder);
-	}
-	public static String getES_typeBackOrder() {
-		return PropertiesUtil.getValue(ES_typeBackOrder);
 	}
 }
