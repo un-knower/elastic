@@ -27,7 +27,7 @@ public class ElasticsearchClientUtils {
 			try {
 				client = new PreBuiltTransportClient(settings)
 						.addTransportAddress(new InetSocketTransportAddress(
-								InetAddress.getByName(Configure.getEsLocation()), Integer.valueOf(Configure.getESscoke_PORT())));
+								InetAddress.getByName(Configure.getEsLocation()), Integer.valueOf(Configure.getEStrans_PORT())));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (UnknownHostException e) {

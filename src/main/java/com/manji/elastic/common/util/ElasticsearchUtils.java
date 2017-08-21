@@ -27,7 +27,7 @@ public class ElasticsearchUtils {
 	        // 创建client
 	        client = new PreBuiltTransportClient(settings)
 	                .addTransportAddress(new InetSocketTransportAddress(
-	        InetAddress.getByName(Configure.getEsLocation()), Integer.valueOf(Configure.getESscoke_PORT())));
+	        InetAddress.getByName(Configure.getEsLocation()), Integer.valueOf(Configure.getEStrans_PORT())));
 	        System.out.println("连接成功。。。。。。。。。。");
 		}
 	}
