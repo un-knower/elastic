@@ -101,9 +101,13 @@ public class V2CommodityAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getArea_code())){
 				qb1.must(QueryBuilders.matchQuery("left_shop_send_area",body.getArea_code()));
 			}
-			//处理品牌
-			if(StringUtils.isNotBlank(body.getBrand_code())) {
-				qb1.must(QueryBuilders.matchQuery("article_brand_id", body.getBrand_code()));
+			//处理品牌list(or逻辑)
+			if(null != body.getBrand_code() && body.getBrand_code().size() > 0){
+				BoolQueryBuilder brandORBuilder = QueryBuilders.boolQuery();
+				for (String brandCode : body.getBrand_code()) {
+					brandORBuilder.should(QueryBuilders.matchQuery("article_brand_id", brandCode));
+				}
+				qb1.must(brandORBuilder);
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
@@ -218,9 +222,13 @@ public class V2CommodityAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getArea_code())){
 				qb1.must(QueryBuilders.matchQuery("left_shop_send_area",body.getArea_code()));
 			}
-			//处理品牌
-			if(StringUtils.isNotBlank(body.getBrand_code())) {
-				qb1.must(QueryBuilders.matchQuery("article_brand_id", body.getBrand_code()));
+			//处理品牌list(or逻辑)
+			if(null != body.getBrand_code() && body.getBrand_code().size() > 0){
+				BoolQueryBuilder brandORBuilder = QueryBuilders.boolQuery();
+				for (String brandCode : body.getBrand_code()) {
+					brandORBuilder.should(QueryBuilders.matchQuery("article_brand_id", brandCode));
+				}
+				qb1.must(brandORBuilder);
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
