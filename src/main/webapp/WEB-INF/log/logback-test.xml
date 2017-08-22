@@ -3,8 +3,8 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="true">
 
     <!-- 项目名称及日志目录定义 -->
-    <property name="PROJECT_NAME" value="elastic_test"/>
-    <property name="LOG_HOME" value="/manji/log/tomcat_test/${PROJECT_NAME}"/>
+    <property name="PROJECT_NAME" value="elastic"/>
+    <property name="LOG_HOME" value="/manji/log/tomcat/${PROJECT_NAME}"/>
 
     <contextName>${CONTEXT_NAME}</contextName>
 
