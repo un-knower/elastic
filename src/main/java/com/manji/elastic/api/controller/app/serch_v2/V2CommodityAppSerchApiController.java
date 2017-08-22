@@ -261,7 +261,7 @@ public class V2CommodityAppSerchApiController {
 			SortBuilder<?> sort = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
 			sorts.add(sort);
 			CollapseBuilder collapse = new CollapseBuilder("shop_id");
-			collapse.setInnerHits(new InnerHitBuilder().setSize(2).setName("top_rated").setSorts(sorts));
+			collapse.setInnerHits(new InnerHitBuilder().setSize(3).setName("top_rated").setSorts(sorts));
 			//创建搜索条件
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
 			requestBuider.setTypes("info");

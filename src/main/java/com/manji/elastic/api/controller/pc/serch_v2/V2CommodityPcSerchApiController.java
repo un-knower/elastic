@@ -169,12 +169,12 @@ public class V2CommodityPcSerchApiController {
 	}
 	
 	/**
-	 *查询分类list
+	 *查询分类list(商品查询)
 	 * @param req
 	 * @return
 	 */
 	@ResponseBody
-	@ApiOperation(value = "查询分类list", notes = "查询分类list"
+	@ApiOperation(value = "查询分类list(商品查询)", notes = "查询分类list(商品查询)"
 			+ "<h3 style='color:red'>状态码说明</h3>"
 			+ "<br/>		10000---成功搜索出商品有结果"
 			+ "<br/>		10001---拿后端返回的message提示一下即可"
@@ -196,6 +196,91 @@ public class V2CommodityPcSerchApiController {
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
 				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+			}
+			//排序处理
+			FieldSortBuilder sortBuilder = null ;
+			if(null != body.getSort_flag()){
+				if(0 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
+				}
+				if(1 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
+				}
+				if(2 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
+				}
+				if(3 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+				}
+				if(4 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_review_score").order(SortOrder.DESC);
+				}
+				if(5 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("shop_order_times").order(SortOrder.DESC);
+				}
+			}
+			//创建搜索条件
+			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
+			requestBuider.setTypes("info");
+			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
+			requestBuider.setQuery(qb1);
+			requestBuider.setCollapse(collapse);
+			if(null != sortBuilder){
+				requestBuider.addSort(sortBuilder);
+			}
+			requestBuider.setFrom((1 - 1) * 50).setSize(50);
+			logger.info("参数json:{}",requestBuider.toString());
+			//执行查询结果
+			SearchResponse searchResponse = requestBuider.get();
+			SearchHits hits = searchResponse.getHits();
+			//logger.info("结果:" + JSON.toJSONString(hits).toString());
+			if(null == hits || hits.getHits() == null || hits.getHits().length == 0){
+				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
+			}
+			baseResult.setResult(hits);
+		}catch (BusinessDealException e) {
+			logger.error("业务处理异常， 错误信息：{}", e.getMessage());
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.BUSSINESS_HANDLE_ERROR.getCode(), e.getMessage());
+		}catch (NotFoundException e) {
+			logger.error("未找到， 错误信息：{}", e.getMessage());
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.NOT_FOUND.getCode(), e.getMessage());
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error("系统异常，{}", e.getMessage());
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw, true));
+			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.SYSTEM_ERROR.getCode(), "系统异常" , sw.toString());
+		}
+		return baseResult;
+	}
+	/**
+	 *查询分类list(商家类查询)
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@ApiOperation(value = "查询分类list(商家类查询)", notes = "查询分类list(商家类查询)"
+			+ "<h3 style='color:red'>状态码说明</h3>"
+			+ "<br/>		10000---成功搜索出商品有结果"
+			+ "<br/>		10001---拿后端返回的message提示一下即可"
+			+ "<br/>		10004---抱歉，没有找到“关键词”的搜索结果")
+	@RequestMapping(value="/queryCategoryIdListGroupShop", method = {RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public BaseObjectResult<SearchHits> queryCategoryIdListGroupShop(HttpServletRequest req, @RequestBody CategorySerchModel body){
+		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
+		try{
+			//连接服务端
+			TransportClient client = ElasticsearchClientUtils.getTranClinet();
+			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
+			//collapse构建
+			CollapseBuilder collapse = new CollapseBuilder("article_category_id");
+			collapse.setInnerHits(new InnerHitBuilder().setSize(0).setName("top_rated"));
+			//关键字
+			if(StringUtils.isNotBlank(body.getQueryStr())){
+				qb1.must(KeySerchBuider.getChniseBulider("shop_name", body.getQueryStr()));
+			}
+			//分类ID
+			if(StringUtils.isNotBlank(body.getCate_id())){
+				qb1.must(QueryBuilders.matchQuery("scope_values",body.getCate_id()));
 			}
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
