@@ -75,25 +75,23 @@ public class V2CommodityPcSerchApiController {
 			if(StringUtils.isNotBlank(body.getCate_id())){
 				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
 			}
-			//是否包邮
-			if(null != body.getShip_flag()){
-				qb1.must(QueryBuilders.matchQuery("is_free",body.getShip_flag()));
-			}
 			//折扣类型
 			if(null != body.getSale_flag()){
 				qb1.must(QueryBuilders.matchQuery("case_article_activity_type",body.getSale_flag()));
 			}
 			//是否包邮逻辑处理
-			if (body.getShip_flag() == 1) {
-				qb1.must(QueryBuilders.matchQuery("is_free",1));
-				if (StringUtils.isBlank(body.getDis_area_code())) {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
-				} else {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
-				}
-			}else{
-				if (StringUtils.isNotBlank(body.getDis_area_code())) {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+			if(null != body.getShip_flag()) {
+				if (body.getShip_flag() == 1) {
+					qb1.must(QueryBuilders.matchQuery("is_free",1));
+					if (StringUtils.isBlank(body.getDis_area_code())) {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
+					} else {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+					}
+				}else{
+					if (StringUtils.isNotBlank(body.getDis_area_code())) {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+					}
 				}
 			}
 			//区域Code

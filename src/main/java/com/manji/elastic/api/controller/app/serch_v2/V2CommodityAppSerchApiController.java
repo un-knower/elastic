@@ -80,17 +80,18 @@ public class V2CommodityAppSerchApiController {
 				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
 			}
 			//是否包邮逻辑处理
-			if (body.getShip_flag() == 1) {
-				qb1.must(QueryBuilders.matchQuery("is_free",1));
-				
-				if (StringUtils.isBlank(body.getDis_area_code())) {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
-				} else {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
-				}
-			}else{
-				if (StringUtils.isNotBlank(body.getDis_area_code())) {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+			if(null != body.getShip_flag()) {
+				if (body.getShip_flag() == 1) {
+					qb1.must(QueryBuilders.matchQuery("is_free",1));
+					if (StringUtils.isBlank(body.getDis_area_code())) {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
+					} else {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+					}
+				}else{
+					if (StringUtils.isNotBlank(body.getDis_area_code())) {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+					}
 				}
 			}
 			//折扣类型
@@ -202,16 +203,18 @@ public class V2CommodityAppSerchApiController {
 				qb1.must(QueryBuilders.matchQuery("scope_values",body.getShop_cate_id()));
 			}
 			//是否包邮逻辑处理
-			if (body.getShip_flag() == 1) {
-				qb1.must(QueryBuilders.matchQuery("is_free",1));
-				if (StringUtils.isBlank(body.getDis_area_code())) {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
-				} else {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
-				}
-			}else{
-				if (StringUtils.isNotBlank(body.getDis_area_code())) {
-					qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+			if(null != body.getShip_flag()) {
+				if (body.getShip_flag() == 1) {
+					qb1.must(QueryBuilders.matchQuery("is_free",1));
+					if (StringUtils.isBlank(body.getDis_area_code())) {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area",1));
+					} else {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+					}
+				}else{
+					if (StringUtils.isNotBlank(body.getDis_area_code())) {
+						qb1.must(QueryBuilders.matchQuery("article_freeshipping_area","1"+body.getDis_area_code()));
+					}
 				}
 			}
 			//折扣类型
@@ -337,20 +340,22 @@ public class V2CommodityAppSerchApiController {
 			qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_id()));
 			//排序处理
 			FieldSortBuilder sortBuilder = null;
-			if(0 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-			}
-			if(1 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
-			}
-			if(2 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
-			}
-			if(3 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
-			}
-			if(4 == body.getSort_flag()){
-				sortBuilder = SortBuilders.fieldSort("article_add_time").order(SortOrder.DESC);
+			if(null != body.getSort_flag()){
+				if(0 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
+				}
+				if(1 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
+				}
+				if(2 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.DESC);
+				}
+				if(3 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_sell_price").order(SortOrder.ASC);
+				}
+				if(4 == body.getSort_flag()){
+					sortBuilder = SortBuilders.fieldSort("article_add_time").order(SortOrder.DESC);
+				}
 			}
 			//创建搜索条件
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_sp_IndexAlias());
