@@ -1,11 +1,7 @@
 package com.manji.elastic.api.commom.utils;
 
-import org.elasticsearch.index.query.DisMaxQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-
-import com.manji.elastic.common.util.Pinyin4j;
 
 public class KeySerchBuider {
 	
@@ -16,18 +12,7 @@ public class KeySerchBuider {
 	 * @return
 	 */
 	public static QueryBuilder getChniseBulider(String key,String value){
-		DisMaxQueryBuilder disMaxQueryBuilder=QueryBuilders.disMaxQuery();
-		//以关键字开头(优先级最高)
-		MatchQueryBuilder q1=QueryBuilders.matchQuery(key+".raw", value).boost(5);
-		//完整包含经过分析过的关键字
-		QueryBuilder q2=QueryBuilders.matchQuery(key, value).minimumShouldMatch("100%");
-		
-		String analysisKey = Pinyin4j.getFirstSpell(value);
-		QueryBuilder pingYinSampleQueryBuilder=QueryBuilders.termQuery(key+".spy", analysisKey).boost(1);
-		
-		disMaxQueryBuilder.add(q1);
-		disMaxQueryBuilder.add(q2);
-		disMaxQueryBuilder.add(pingYinSampleQueryBuilder);
+		QueryBuilder q2=QueryBuilders.matchQuery(key+"", value).prefixLength(1).fuzziness(0);
 		return q2;
 	}
 	/**
