@@ -2,6 +2,8 @@ package com.manji.elastic.api.controller.pc.serch_v2;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,7 +75,12 @@ public class V2CommodityPcSerchApiController {
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("class_list", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			//折扣类型
 			if(null != body.getSale_flag()){
@@ -193,7 +200,12 @@ public class V2CommodityPcSerchApiController {
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("class_list", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
@@ -278,7 +290,12 @@ public class V2CommodityPcSerchApiController {
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("scope_values",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("scope_values", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
@@ -363,7 +380,12 @@ public class V2CommodityPcSerchApiController {
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("class_list", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			//不为0的
 			qb1.mustNot(QueryBuilders.termQuery("article_brand_id","0"));

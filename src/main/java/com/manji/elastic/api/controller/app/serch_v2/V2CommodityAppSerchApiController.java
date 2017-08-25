@@ -3,6 +3,7 @@ package com.manji.elastic.api.controller.app.serch_v2;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,7 +78,12 @@ public class V2CommodityAppSerchApiController {
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("class_list", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			//是否包邮逻辑处理
 			if(null != body.getShip_flag()) {
@@ -196,7 +202,12 @@ public class V2CommodityAppSerchApiController {
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("class_list",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("class_list", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			// 商家分类
 			if (StringUtils.isNotBlank(body.getShop_cate_id())) {
@@ -330,11 +341,21 @@ public class V2CommodityAppSerchApiController {
 			}
 			//商家分类
 			if(StringUtils.isNotBlank(body.getShop_cate_id())){
-				qb1.must(QueryBuilders.matchQuery("article_user_category_id",body.getShop_cate_id()));
+				List<String> shop_cate_ids = Arrays.asList(body.getShop_cate_id().split(" "));
+				BoolQueryBuilder shopCateORBuilder = QueryBuilders.boolQuery();
+				for (String shop_cate_id : shop_cate_ids) {
+					shopCateORBuilder.should(QueryBuilders.matchQuery("article_user_category_id", shop_cate_id));
+				}
+				qb1.must(shopCateORBuilder);
 			}
 			//折扣
 			if(StringUtils.isNotBlank(body.getAct_flag())){
-				qb1.must(QueryBuilders.matchQuery("article_activity_type",body.getAct_flag()));
+				List<String> act_flags = Arrays.asList(body.getAct_flag().split(" "));
+				BoolQueryBuilder actFlagORBuilder = QueryBuilders.boolQuery();
+				for (String act_flag : act_flags) {
+					actFlagORBuilder.should(QueryBuilders.matchQuery("article_activity_type", act_flag));
+				}
+				qb1.must(actFlagORBuilder);
 			}
 			//商家ID
 			qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_id()));
@@ -527,5 +548,13 @@ public class V2CommodityAppSerchApiController {
 			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.SYSTEM_ERROR.getCode(), "系统异常" , sw.toString());
 		}
 		return baseResult;
+	}
+	
+	public static void main(String[] args) {
+		String abc = "798";
+		List<String> ss = Arrays.asList(abc.split(" "));
+		for (String string : ss) {
+			System.out.println(string);
+		}
 	}
 }

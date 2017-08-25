@@ -2,6 +2,8 @@ package com.manji.elastic.api.controller.app.serch_v2;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -87,11 +89,21 @@ public class V2ShopAppSerchApiController {
 			}
 			// 商家主营分类
 			if(StringUtils.isNotBlank(body.getBusy_id())){
-				qb1.must(QueryBuilders.matchQuery("main_business",body.getBusy_id()));
+				List<String> busy_ids = Arrays.asList(body.getBusy_id().split(" "));
+				BoolQueryBuilder busyIdORBuilder = QueryBuilders.boolQuery();
+				for (String busy_id : busy_ids) {
+					busyIdORBuilder.should(QueryBuilders.matchQuery("main_business", busy_id));
+				}
+				qb1.must(busyIdORBuilder);
 			}
 			//商家分类
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("scope_values",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("scope_values", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			//是否签约
 			if(null != body.getSign_flag()){
@@ -224,9 +236,14 @@ public class V2ShopAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				qb1.must(KeySerchBuider.getChniseBulider("name", body.getQueryStr()));
 			}
-			//分类ID
+			//商家分类
 			if(StringUtils.isNotBlank(body.getCate_id())){
-				qb1.must(QueryBuilders.matchQuery("scope_values",body.getCate_id()));
+				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
+				BoolQueryBuilder cateIdORBuilder = QueryBuilders.boolQuery();
+				for (String cate_id : cate_ids) {
+					cateIdORBuilder.should(QueryBuilders.matchQuery("scope_values", cate_id));
+				}
+				qb1.must(cateIdORBuilder);
 			}
 			//商家店铺开启状态
 			if(null != body.getOpen_flag()){
