@@ -1,5 +1,7 @@
 package com.manji.elastic.api.commom.utils;
 
+import org.elasticsearch.index.query.DisMaxQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -12,8 +14,21 @@ public class KeySerchBuider {
 	 * @return
 	 */
 	public static QueryBuilder getChniseBulider(String key,String value){
-		QueryBuilder q2=QueryBuilders.matchQuery(key+"", value).prefixLength(1).fuzziness(0);
-		return q2;
+		/*QueryBuilder q2=QueryBuilders.matchQuery(key+"", value).prefixLength(1).fuzziness(0);
+		return q2;*/
+		
+		 DisMaxQueryBuilder  disMaxQueryBuilder=QueryBuilders.disMaxQuery();
+	        //以关键字开头(优先级最高)
+	        MatchQueryBuilder q1=QueryBuilders.matchQuery(key+"",key).analyzer("ngramSearchAnalyzer").boost(5);        
+	        //完整包含经过分析过的关键字
+//	         boolean  whitespace=key.contains(" ");
+//	         int slop=whitespace?50:5;
+	        QueryBuilder q2=QueryBuilders.matchQuery(key, key).analyzer("ik").minimumShouldMatch("100%");
+	        disMaxQueryBuilder.add(q1);
+	        disMaxQueryBuilder.add(q2);
+	        
+	        return disMaxQueryBuilder;
+	        
 	}
 	/**
 	 * 混合搜索

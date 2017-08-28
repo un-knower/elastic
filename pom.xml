@@ -253,6 +253,11 @@
 	    <version>5.5.1</version>
 	</dependency>
 	<dependency>
+		<groupId>org.elasticsearch.client</groupId>
+         <artifactId>x-pack-transport</artifactId>
+         <version>5.5.1</version>
+	</dependency>
+	<dependency>
 	    <groupId>org.apache.logging.log4j</groupId>
 	    <artifactId>log4j-to-slf4j</artifactId>
 	    <version>2.7</version>
@@ -263,6 +268,19 @@
 	    <version>1.7.21</version>
 	</dependency>
   </dependencies>
+  <repositories>
+  <!--  add the elasticsearch repo -->
+   <repository>
+      <id>elasticsearch-releases</id>
+      <url>https://artifacts.elastic.co/maven</url>
+      <releases>
+         <enabled>true</enabled>
+      </releases>
+      <snapshots>
+         <enabled>false</enabled>
+      </snapshots>
+   </repository>
+</repositories>
   <build>
     <finalName>elastic</finalName>
     <plugins>
