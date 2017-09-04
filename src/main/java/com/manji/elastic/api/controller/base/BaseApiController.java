@@ -54,11 +54,7 @@ public class BaseApiController {
 	public static Client client49 = null;
 	
 	
-	/**
-	 * 综合商品查询
-	 * @param req
-	 * @return
-	 */
+
 	@ResponseBody
 	@ApiOperation(value = "", notes = "")
 	@RequestMapping(value="/startClient", method = {RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -78,11 +74,8 @@ public class BaseApiController {
 		}
 		return baseResult;
 	}
-	/**
-	 * 综合商品查询
-	 * @param req
-	 * @return
-	 */
+
+	
 	@ResponseBody
 	@ApiOperation(value = "", notes = "")
 	@RequestMapping(value="/stopClient", method = {RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -107,15 +100,10 @@ public class BaseApiController {
 	
 	
 	
-	/**
-	 * 综合商品查询
-	 * @param req
-	 * @return
-	 */
 	@ResponseBody
 	@ApiOperation(value = "", notes = "")
 	@RequestMapping(value="/abc", method = {RequestMethod.POST}, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public BaseResult abc(HttpServletRequest req,@RequestParam(required = false) Integer pageNum){
+	public BaseResult abc(HttpServletRequest req,@RequestParam(required = false) Integer pageNum,@RequestParam(required = false) Integer size){
 		BaseResult baseResult=new BaseResult(CodeEnum.SUCCESS.getCode(),"成功");
 		try{
 			
@@ -144,7 +132,7 @@ public class BaseApiController {
 				requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
 				//requestBuider.setQuery(qb1);
 				
-				requestBuider.setFrom((pageNum - 1) * 10000).setSize(10000);
+				requestBuider.setFrom((pageNum - 1) * size).setSize(size);
 				
 				System.out.println("参数json:{}" + requestBuider.toString());
 				
@@ -155,7 +143,6 @@ public class BaseApiController {
 				
 				//录入到 132
 				for (SearchHit searchHit : hits) {
-				
 					IndexRequestBuilder requestBuilder = client132.prepareIndex("article", "info", null);//设置索引名称，索引类型，id  
 					requestBuilder.setSource(JSON.toJSONString(searchHit.getSource()),XContentType.JSON).execute().actionGet();//创建索引  
 				}

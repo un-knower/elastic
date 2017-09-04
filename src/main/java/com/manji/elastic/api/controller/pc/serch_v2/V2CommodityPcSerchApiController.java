@@ -73,6 +73,10 @@ public class V2CommodityPcSerchApiController {
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getQueryStr()));
 			}
+			//商家ID
+			if(null != body.getShop_id()) {
+				qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_id()));
+			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
 				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
@@ -120,9 +124,9 @@ public class V2CommodityPcSerchApiController {
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
-				if(0 == body.getSort_flag()){
+				/*if(0 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-				}
+				}*/
 				if(1 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
 				}
@@ -210,9 +214,9 @@ public class V2CommodityPcSerchApiController {
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
-				if(0 == body.getSort_flag()){
+				/*if(0 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-				}
+				}*/
 				if(1 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
 				}
@@ -300,9 +304,9 @@ public class V2CommodityPcSerchApiController {
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
-				if(0 == body.getSort_flag()){
+				/*if(0 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-				}
+				}*/
 				if(1 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
 				}
@@ -396,9 +400,9 @@ public class V2CommodityPcSerchApiController {
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
-				if(0 == body.getSort_flag()){
+				/*if(0 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-				}
+				}*/
 				if(1 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
 				}

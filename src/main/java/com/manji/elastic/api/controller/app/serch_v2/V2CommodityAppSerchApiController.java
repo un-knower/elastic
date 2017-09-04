@@ -74,7 +74,7 @@ public class V2CommodityAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字处理
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getQueryStr()));
+				qb1.must(KeySerchBuider.getChniseBulider("article_category_index", body.getQueryStr()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
@@ -123,9 +123,9 @@ public class V2CommodityAppSerchApiController {
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
-				if(0 == body.getSort_flag()){
+				/*if(0 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-				}
+				}*/
 				if(1 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
 				}
@@ -251,9 +251,9 @@ public class V2CommodityAppSerchApiController {
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
-				if(0 == body.getSort_flag()){
+				/*if(0 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-				}
+				}*/
 				if(1 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
 				}
@@ -362,9 +362,9 @@ public class V2CommodityAppSerchApiController {
 			//排序处理
 			FieldSortBuilder sortBuilder = null;
 			if(null != body.getSort_flag()){
-				if(0 == body.getSort_flag()){
+				/*if(0 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_review_score").order(SortOrder.DESC);
-				}
+				}*/
 				if(1 == body.getSort_flag()){
 					sortBuilder = SortBuilders.fieldSort("article_order_times").order(SortOrder.DESC);
 				}

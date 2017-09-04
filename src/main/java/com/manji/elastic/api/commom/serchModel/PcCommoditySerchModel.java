@@ -14,6 +14,7 @@ public class PcCommoditySerchModel extends BaseSerchModel {
 	private Integer price_start = 0; //筛选初始金额
 	private Integer price_end;//筛选结束金额 ，默认不传。
 	private String shop_cate_id ;//商家分类ID
+	private Integer shop_id;//商家ID
 	//包邮特殊逻辑
 	private Integer ship_flag=0;//是否包邮，默认为0，1为包邮
 	private String dis_area_code;//配送地区
@@ -61,6 +62,13 @@ public class PcCommoditySerchModel extends BaseSerchModel {
 	}
 	public void setPrice_end(Integer price_end) {
 		this.price_end = price_end;
+	}
+	@ApiModelProperty(value = "商家ID")
+	public Integer getShop_id() {
+		return shop_id;
+	}
+	public void setShop_id(Integer shop_id) {
+		this.shop_id = shop_id;
 	}
 	@ApiModelProperty(value = "商家分类ID")
 	public String getShop_cate_id() {
