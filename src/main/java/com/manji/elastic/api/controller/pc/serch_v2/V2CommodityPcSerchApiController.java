@@ -71,7 +71,7 @@ public class V2CommodityPcSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getQueryStr()));
+				qb1.must(KeySerchBuider.getChniseBulider("article_category_index", body.getQueryStr()));
 			}
 			//商家ID
 			if(null != body.getShop_id()) {
