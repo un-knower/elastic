@@ -36,6 +36,8 @@ import com.manji.elastic.api.commom.serchModel.ShopSerchModel;
 import com.manji.elastic.api.commom.utils.AreaCodeUtil;
 import com.manji.elastic.api.commom.utils.DistanceDoUtils;
 import com.manji.elastic.api.commom.utils.KeySerchBuider;
+import com.manji.elastic.api.controller.hotsearch.HotSearchAddBiz;
+import com.manji.elastic.api.controller.hotsearch.RecordModel;
 import com.manji.elastic.biz.helper.ElasticsearchClientUtils;
 import com.manji.elastic.common.exception.BusinessDealException;
 import com.manji.elastic.common.exception.NotFoundException;
@@ -196,6 +198,16 @@ public class V2ShopAppSerchApiController {
 			long endTime = System.currentTimeMillis();
 			logger.info("商家综合查询--搜索耗时：" + (endTime - startTime) + "ms");
 			baseResult.setResult(hits);
+			
+			
+			//录入热搜词
+			if(body.getQueryStr().length() >= 2) {
+				RecordModel wordsModel = new RecordModel();
+				wordsModel.setContent(body.getQueryStr());
+				wordsModel.setDevice("APP");
+				wordsModel.setIndexType("shop");
+				HotSearchAddBiz.addHotSearchWords(wordsModel);
+			}
 		}catch (BusinessDealException e) {
 			logger.error("业务处理异常， 错误信息：{}", e.getMessage());
 			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.BUSSINESS_HANDLE_ERROR.getCode(), e.getMessage());

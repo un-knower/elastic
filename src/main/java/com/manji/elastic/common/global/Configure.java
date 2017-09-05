@@ -27,6 +27,8 @@ public final class Configure {
 	
 	private static final String ES_IndexOrder = "ES_IndexOrder";
 	
+	private static final String ES_IndexHotSearchWords = "ES_IndexHotSearchWords";
+	
 	static {
 		String profiles = System.getProperty("spring.profiles.active", "dev");
 		logger.info("=========================>>>>在什么环境启动？===>"+profiles);
@@ -91,5 +93,8 @@ public final class Configure {
 	}
 	public static String getES_IndexOrder() {
 		return PropertiesUtil.getValue(ES_IndexOrder);
+	}
+	public static String getES_IndexHotSearchWords() {
+		return PropertiesUtil.getValue(ES_IndexHotSearchWords);
 	}
 }

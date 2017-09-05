@@ -33,6 +33,8 @@ import com.manji.elastic.api.commom.serchModel.BrandSerchModel;
 import com.manji.elastic.api.commom.serchModel.CategorySerchModel;
 import com.manji.elastic.api.commom.serchModel.PcCommoditySerchModel;
 import com.manji.elastic.api.commom.utils.KeySerchBuider;
+import com.manji.elastic.api.controller.hotsearch.HotSearchAddBiz;
+import com.manji.elastic.api.controller.hotsearch.RecordModel;
 import com.manji.elastic.biz.helper.ElasticsearchClientUtils;
 import com.manji.elastic.common.exception.BusinessDealException;
 import com.manji.elastic.common.exception.NotFoundException;
@@ -161,6 +163,15 @@ public class V2CommodityPcSerchApiController {
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
 			baseResult.setResult(hits);
+			
+			//录入热搜词
+			if(body.getQueryStr().length() >= 2) {
+				RecordModel wordsModel = new RecordModel();
+				wordsModel.setContent(body.getQueryStr());
+				wordsModel.setDevice("PC");
+				wordsModel.setIndexType("commodity");
+				HotSearchAddBiz.addHotSearchWords(wordsModel);
+			}
 		}catch (BusinessDealException e) {
 			logger.error("业务处理异常， 错误信息：{}", e.getMessage());
 			baseResult = new BaseObjectResult<SearchHits>(CodeEnum.BUSSINESS_HANDLE_ERROR.getCode(), e.getMessage());
