@@ -102,9 +102,31 @@ public class V2CommodityAppSerchApiController {
 					}
 				}
 			}
-			//折扣类型
+			//商家ID
+			if(null != body.getShop_id()) {
+				qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_id()));
+			}
+			//商家分类
+			if(StringUtils.isNotBlank(body.getArticle_user_category_id())){
+				List<String> article_user_category_ids = Arrays.asList(body.getArticle_user_category_id().split(" "));
+				BoolQueryBuilder article_user_categoryBuilder = QueryBuilders.boolQuery();
+				for (String category_id : article_user_category_ids) {
+					article_user_categoryBuilder.should(QueryBuilders.matchQuery("article_user_category_id", category_id));
+				}
+				qb1.must(article_user_categoryBuilder);
+			}
+			//是否折扣
 			if(null != body.getSale_flag()){
 				qb1.must(QueryBuilders.matchQuery("case_article_activity_type",body.getSale_flag()));
+			}
+			//折扣
+			if(StringUtils.isNotBlank(body.getAct_flag())){
+				List<String> act_flags = Arrays.asList(body.getAct_flag().split(" "));
+				BoolQueryBuilder actFlagORBuilder = QueryBuilders.boolQuery();
+				for (String act_flag : act_flags) {
+					actFlagORBuilder.should(QueryBuilders.matchQuery("article_activity_type", act_flag));
+				}
+				qb1.must(actFlagORBuilder);
 			}
 			//商家区域
 			if(StringUtils.isNotBlank(body.getArea_code())){
@@ -120,8 +142,8 @@ public class V2CommodityAppSerchApiController {
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
-					QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()).lt(body.getPrice_end()) 
-					: QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()));
+					QueryBuilders.rangeQuery("article_sell_price").gte(body.getPrice_start()).lte(body.getPrice_end()) 
+					: QueryBuilders.rangeQuery("article_sell_price").gte(body.getPrice_start()));
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
@@ -257,8 +279,8 @@ public class V2CommodityAppSerchApiController {
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
-					QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()).lt(body.getPrice_end()) 
-					: QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()));
+					QueryBuilders.rangeQuery("article_sell_price").gte(body.getPrice_start()).lte(body.getPrice_end()) 
+					: QueryBuilders.rangeQuery("article_sell_price").gte(body.getPrice_start()));
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){

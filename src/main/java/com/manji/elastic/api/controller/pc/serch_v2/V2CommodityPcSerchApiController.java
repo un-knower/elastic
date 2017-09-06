@@ -79,6 +79,15 @@ public class V2CommodityPcSerchApiController {
 			if(null != body.getShop_id()) {
 				qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_id()));
 			}
+			//商家分类
+			if(StringUtils.isNotBlank(body.getArticle_user_category_id())){
+				List<String> article_user_category_ids = Arrays.asList(body.getArticle_user_category_id().split(" "));
+				BoolQueryBuilder article_user_categoryBuilder = QueryBuilders.boolQuery();
+				for (String category_id : article_user_category_ids) {
+					article_user_categoryBuilder.should(QueryBuilders.matchQuery("article_user_category_id", category_id));
+				}
+				qb1.must(article_user_categoryBuilder);
+			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
 				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
@@ -88,9 +97,18 @@ public class V2CommodityPcSerchApiController {
 				}
 				qb1.must(cateIdORBuilder);
 			}
-			//折扣类型
+			//是否折扣
 			if(null != body.getSale_flag()){
 				qb1.must(QueryBuilders.matchQuery("case_article_activity_type",body.getSale_flag()));
+			}
+			//折扣
+			if(StringUtils.isNotBlank(body.getAct_flag())){
+				List<String> act_flags = Arrays.asList(body.getAct_flag().split(" "));
+				BoolQueryBuilder actFlagORBuilder = QueryBuilders.boolQuery();
+				for (String act_flag : act_flags) {
+					actFlagORBuilder.should(QueryBuilders.matchQuery("article_activity_type", act_flag));
+				}
+				qb1.must(actFlagORBuilder);
 			}
 			//是否包邮逻辑处理
 			if(null != body.getShip_flag()) {
@@ -121,8 +139,8 @@ public class V2CommodityPcSerchApiController {
 			}
 			//价格区间处理
 			qb1.filter(body.getPrice_end() != null ? 
-					QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()).lt(body.getPrice_end()) 
-					: QueryBuilders.rangeQuery("article_sell_price").gt(body.getPrice_start()));
+					QueryBuilders.rangeQuery("article_sell_price").gte(body.getPrice_start()).lte(body.getPrice_end()) 
+					: QueryBuilders.rangeQuery("article_sell_price").gte(body.getPrice_start()));
 			//排序处理
 			FieldSortBuilder sortBuilder = null ;
 			if(null != body.getSort_flag()){
@@ -391,7 +409,7 @@ public class V2CommodityPcSerchApiController {
 			collapse.setInnerHits(new InnerHitBuilder().setSize(0).setName("top_rated"));
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getQueryStr()));
+				qb1.must(KeySerchBuider.getChniseBulider("article_category_index", body.getQueryStr()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){

@@ -87,7 +87,7 @@ public class V2ShopAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(KeySerchBuider.getChniseBulider("name", body.getQueryStr()));
+				qb1.must(KeySerchBuider.getChniseBulider("shopinfo_index", body.getQueryStr()));
 			}
 			// 商家主营分类
 			if(StringUtils.isNotBlank(body.getBusy_id())){
@@ -246,7 +246,7 @@ public class V2ShopAppSerchApiController {
 			BoolQueryBuilder qb1 = QueryBuilders.boolQuery();
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
-				qb1.must(KeySerchBuider.getChniseBulider("name", body.getQueryStr()));
+				qb1.must(KeySerchBuider.getChniseBulider("shopinfo_index", body.getQueryStr()));
 			}
 			//商家分类
 			if(StringUtils.isNotBlank(body.getCate_id())){

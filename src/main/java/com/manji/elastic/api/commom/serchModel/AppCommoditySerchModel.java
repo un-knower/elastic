@@ -10,10 +10,13 @@ public class AppCommoditySerchModel extends BaseSerchModel {
 	private String cate_id;//分类ID
 	private List<String> brand_code;//多选品牌ID
 	private String area_code;//地区码。
-	private Integer sale_flag;///折扣类型，01
+	private Integer sale_flag;///是否折扣
 	private Integer price_start = 0; //筛选初始金额
 	private Integer price_end;//筛选结束金额 ，默认不传。
 	private String shop_cate_id ;//商家分类ID
+	private String article_user_category_id;//商家分类ID
+	private Integer shop_id;//商家ID
+	private String act_flag;///折扣类型1、折扣2、满折3、满减劵4、满额返劵5、指定赠6、买赠7、满赠8、包邮
 	//包邮特殊逻辑
 	private Integer ship_flag=0;//是否包邮，默认为0，1为包邮
 	private String dis_area_code;//配送地区
@@ -40,7 +43,7 @@ public class AppCommoditySerchModel extends BaseSerchModel {
 	public void setArea_code(String area_code) {
 		this.area_code = area_code;
 	}
-	@ApiModelProperty(value = "折扣类型")
+	@ApiModelProperty(value = "是否折扣")
 	public Integer getSale_flag() {
 		return sale_flag;
 	}
@@ -62,11 +65,32 @@ public class AppCommoditySerchModel extends BaseSerchModel {
 		this.price_end = price_end;
 	}
 	@ApiModelProperty(value = "商家分类ID")
+	public String getArticle_user_category_id() {
+		return article_user_category_id;
+	}
+	public void setArticle_user_category_id(String article_user_category_id) {
+		this.article_user_category_id = article_user_category_id;
+	}
+	@ApiModelProperty(value = "商家分类ID")
 	public String getShop_cate_id() {
 		return shop_cate_id;
 	}
 	public void setShop_cate_id(String shop_cate_id) {
 		this.shop_cate_id = shop_cate_id;
+	}
+	@ApiModelProperty(value = "商家ID")
+	public Integer getShop_id() {
+		return shop_id;
+	}
+	public void setShop_id(Integer shop_id) {
+		this.shop_id = shop_id;
+	}
+	@ApiModelProperty(value = "折扣类型1、折扣2、满折3、满减劵4、满额返劵5、指定赠6、买赠7、满赠8、包邮")
+	public String getAct_flag() {
+		return act_flag;
+	}
+	public void setAct_flag(String act_flag) {
+		this.act_flag = act_flag;
 	}
 	@ApiModelProperty(value = "是否包邮，0不包邮，1为包邮")
 	public Integer getShip_flag() {
