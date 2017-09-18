@@ -55,7 +55,7 @@ public class V1APPArticleApiController {
 			// 关键字+分类ID
 			if (!"".equals(query.getQueryStr())) {
 				//sb.append("{ \"match\": { \"shop_name\": \"" + query.getQueryStr() + "\" } }");
-				sb.append("{ \"match\": { \"article_title\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
+				sb.append("{ \"match\": { \"article_category_index\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
 			}
 			if (!"".equals(query.getCate_id())) {
 				

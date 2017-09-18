@@ -89,6 +89,10 @@ public class V2ShopAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				qb1.must(KeySerchBuider.getChniseBulider("shopinfo_index", body.getQueryStr()));
 			}
+			//商家名处理
+			if(StringUtils.isNotBlank(body.getShopName())){
+				qb1.must(KeySerchBuider.getChniseBulider("name", body.getShopName()));
+			}
 			// 商家主营分类
 			if(StringUtils.isNotBlank(body.getBusy_id())){
 				List<String> busy_ids = Arrays.asList(body.getBusy_id().split(" "));

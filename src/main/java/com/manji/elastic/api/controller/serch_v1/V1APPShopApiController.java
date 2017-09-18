@@ -60,7 +60,7 @@ public class V1APPShopApiController {
 			StringBuffer sb = new StringBuffer("{\"query\": {\"bool\": {\"must\": [");
 			// 关键字
 			if (!"".equals(query.getQueryStr())) {
-				sb.append("{ \"match\": { \"name\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
+				sb.append("{ \"match\": { \"shopinfo_index\": {\"query\":\"" + query.getQueryStr() + "\",\"operator\": \"and\"}} }");
 			}
 			// 商家主营分类
 			if (!"".equals(query.getBusy_id())) {

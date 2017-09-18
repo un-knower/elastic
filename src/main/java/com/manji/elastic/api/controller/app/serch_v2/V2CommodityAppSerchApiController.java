@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import io.netty.util.internal.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -77,6 +78,14 @@ public class V2CommodityAppSerchApiController {
 			//关键字处理
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				qb1.must(KeySerchBuider.getChniseBulider("article_category_index", body.getQueryStr()));
+			}
+			//商品名处理
+			if(StringUtils.isNotBlank(body.getArticleName())){
+				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getArticleName()));
+			}
+			//商家名处理
+			if(StringUtils.isNotBlank(body.getShopName())){
+				qb1.must(KeySerchBuider.getChniseBulider("shop_name", body.getShopName()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){

@@ -75,6 +75,14 @@ public class V2CommodityPcSerchApiController {
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				qb1.must(KeySerchBuider.getChniseBulider("article_category_index", body.getQueryStr()));
 			}
+			//商品名处理
+			if(StringUtils.isNotBlank(body.getArticleName())){
+				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getArticleName()));
+			}
+			//商家名处理
+			if(StringUtils.isNotBlank(body.getShopName())){
+				qb1.must(KeySerchBuider.getChniseBulider("shop_name", body.getShopName()));
+			}
 			//商家ID
 			if(null != body.getShop_id()) {
 				qb1.must(QueryBuilders.matchQuery("shop_id",body.getShop_id()));
@@ -230,6 +238,14 @@ public class V2CommodityPcSerchApiController {
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getQueryStr()));
+			}
+			//商品名处理
+			if(StringUtils.isNotBlank(body.getArticleName())){
+				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getArticleName()));
+			}
+			//商家名处理
+			if(StringUtils.isNotBlank(body.getShopName())){
+				qb1.must(KeySerchBuider.getChniseBulider("shop_name", body.getShopName()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
@@ -410,6 +426,14 @@ public class V2CommodityPcSerchApiController {
 			//关键字
 			if(StringUtils.isNotBlank(body.getQueryStr())){
 				qb1.must(KeySerchBuider.getChniseBulider("article_category_index", body.getQueryStr()));
+			}
+			//商品名处理
+			if(StringUtils.isNotBlank(body.getArticleName())){
+				qb1.must(KeySerchBuider.getChniseBulider("article_title", body.getArticleName()));
+			}
+			//商家名处理
+			if(StringUtils.isNotBlank(body.getShopName())){
+				qb1.must(KeySerchBuider.getChniseBulider("shop_name", body.getShopName()));
 			}
 			//分类ID
 			if(StringUtils.isNotBlank(body.getCate_id())){
