@@ -73,13 +73,14 @@ public class V2ShopAppSerchApiController {
 	public BaseObjectResult<SearchHits> queryShop(HttpServletRequest req, @RequestBody ShopSerchModel body){
 		BaseObjectResult<SearchHits> baseResult=new BaseObjectResult<SearchHits>(CodeEnum.SUCCESS.getCode(),"查询成功");
 		try{
-			if(StringUtils.isBlank(body.getLocation())){
-				throw new BusinessDealException("获取位置信息失败~~~");
-			}
-			String lat = body.getLocation().split(",")[0];
-			String lon = body.getLocation().split(",")[1];
-			if(StringUtils.isBlank(lat) || StringUtils.isBlank(lon)){
-				throw new BusinessDealException("获取位置信息失败~~~");
+			String lat = "";
+			String lon = "";
+			if(StringUtils.isNotBlank(body.getLocation())){
+				lat = body.getLocation().split(",")[0];
+				lon = body.getLocation().split(",")[1];
+				if(StringUtils.isBlank(lat) || StringUtils.isBlank(lon)){
+					throw new BusinessDealException("获取位置信息失败~~~");
+				}
 			}
 			long startTime = System.currentTimeMillis();
 			//连接服务端
@@ -123,31 +124,34 @@ public class V2ShopAppSerchApiController {
 			if(StringUtils.isNotBlank(body.getArea_code())){
 				qb1.must(QueryBuilders.matchQuery("area_code",body.getArea_code()));
 			}
-			//搜索附近区域
-			QueryBuilder builder = QueryBuilders.geoDistanceQuery("latlng")
-				.distance(body.getDistance_max() + "m")
-				.point(Double.valueOf(lat), Double.valueOf(lon))
-				.geoDistance(GeoDistance.ARC);
-			qb1.filter(builder);
-			
-			//排序方式
-			GeoDistanceSortBuilder sort = new GeoDistanceSortBuilder("latlng", Double.valueOf(lat), Double.valueOf(lon));
-			sort.unit(DistanceUnit.METERS);//距离单位米  
-			sort.order(SortOrder.ASC); 
-			
+			GeoDistanceSortBuilder sort = null;
+			if(StringUtils.isNotBlank(lat) && StringUtils.isNotBlank(lon)){
+				//搜索附近区域
+				QueryBuilder builder = QueryBuilders.geoDistanceQuery("latlng")
+						.distance(body.getDistance_max() + "m")
+						.point(Double.valueOf(lat), Double.valueOf(lon))
+						.geoDistance(GeoDistance.ARC);
+				qb1.filter(builder);
+				//排序方式
+				sort = new GeoDistanceSortBuilder("latlng", Double.valueOf(lat), Double.valueOf(lon));
+				sort.unit(DistanceUnit.METERS);//距离单位米
+				sort.order(SortOrder.ASC);
+			}
 			SearchRequestBuilder requestBuider = client.prepareSearch(Configure.getES_shop_IndexAlias()).setTypes("info");
 			requestBuider.setSearchType(SearchType.QUERY_THEN_FETCH);
 			requestBuider.setQuery(qb1);
 			if(null != body.getSort_flag()){
 				//距离排序
-				if(body.getSort_flag() == 0){
+				if(body.getSort_flag() == 0 && StringUtils.isNotBlank(lat) && StringUtils.isNotBlank(lon)){
 					requestBuider.addSort(sort);
 				}
 				//评分和距离综合排序
 				if(body.getSort_flag() == 1){
 					requestBuider.addSort(SortBuilders.fieldSort("review_score").order(SortOrder.DESC));
-					sort.order(SortOrder.ASC); 
-					requestBuider.addSort(sort);
+					if(StringUtils.isNotBlank(lat) && StringUtils.isNotBlank(lon)){
+						sort.order(SortOrder.ASC);
+						requestBuider.addSort(sort);
+					}
 				}
 			}
 			requestBuider.setFrom((body.getPageNum() - 1) * body.getSize()).setSize(body.getSize());
@@ -166,13 +170,15 @@ public class V2ShopAppSerchApiController {
 				requestBuiderExtra.setQuery(qb1);
 				if(null != body.getSort_flag()){
 					//距离排序
-					if(body.getSort_flag() == 0){
+					if(body.getSort_flag() == 0 && StringUtils.isNotBlank(lat) && StringUtils.isNotBlank(lon)){
 						requestBuiderExtra.addSort(sort);
 					}
 					//评分和距离综合排序
 					if(body.getSort_flag() == 1){
 						requestBuiderExtra.addSort(SortBuilders.fieldSort("review_score").order(SortOrder.DESC));
-						requestBuiderExtra.addSort(sort);
+						if(StringUtils.isNotBlank(lat) && StringUtils.isNotBlank(lon)){
+							requestBuiderExtra.addSort(sort);
+						}
 					}
 				}
 				if(end -signCount < body.getSize()){
@@ -195,7 +201,7 @@ public class V2ShopAppSerchApiController {
 				throw new NotFoundException("抱歉，没有找到“关键词”的搜索结果");
 			}
 			//默认匹配度排序无距离，单独处理距离信息
-			if(null == body.getSort_flag()){
+			if(null == body.getSort_flag() && StringUtils.isNotBlank(body.getLocation())){
 				hits = DistanceDoUtils.computerJl(body.getLocation(), hits);
 			}
 			//logger.info("商家查询结果:" + JSON.toJSONString(hits).toString());
