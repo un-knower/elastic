@@ -8,6 +8,7 @@ public class ShopSerchModel extends BaseSerchModel {
 	private Integer distance_max = 1000;//多少米内
 	private String cate_id;
 	private String busy_id;
+	private String main_business_category_channel_id;
 	private String area_code;
 	private Integer sign_flag;
 	private Integer open_flag;
@@ -40,6 +41,13 @@ public class ShopSerchModel extends BaseSerchModel {
 	}
 	public void setBusy_id(String busy_id) {
 		this.busy_id = busy_id;
+	}
+	@ApiModelProperty(value = "商家主营分类的频道ID")
+	public String getMain_business_category_channel_id() {
+		return main_business_category_channel_id;
+	}
+	public void setMain_business_category_channel_id(String main_business_category_channel_id) {
+		this.main_business_category_channel_id = main_business_category_channel_id;
 	}
 	@ApiModelProperty(value = "区域Code")
 	public String getArea_code() {

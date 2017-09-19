@@ -1,5 +1,7 @@
 package com.manji.elastic.api.commom.utils;
 
+import org.apache.lucene.index.Fields;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 

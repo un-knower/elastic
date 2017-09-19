@@ -146,7 +146,6 @@ public class BaseApiController {
 					IndexRequestBuilder requestBuilder = client132.prepareIndex("article", "info", null);//设置索引名称，索引类型，id  
 					requestBuilder.setSource(JSON.toJSONString(searchHit.getSource()),XContentType.JSON).execute().actionGet();//创建索引  
 				}
-			
 		}catch (BusinessDealException e) {
 			logger.error("业务处理异常， 错误信息：{}", e.getMessage());
 			baseResult = new BaseResult(CodeEnum.BUSSINESS_HANDLE_ERROR.getCode(), e.getMessage());

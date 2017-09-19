@@ -103,6 +103,15 @@ public class V2ShopAppSerchApiController {
 				}
 				qb1.must(busyIdORBuilder);
 			}
+			// 商家主营分类的频道ID
+			if(StringUtils.isNotBlank(body.getMain_business_category_channel_id())){
+				List<String> busy_channel_ids = Arrays.asList(body.getMain_business_category_channel_id().split(" "));
+				BoolQueryBuilder busyChannelIdORBuilder = QueryBuilders.boolQuery();
+				for (String busy_channel_id : busy_channel_ids) {
+					busyChannelIdORBuilder.should(QueryBuilders.matchQuery("main_business_category_channel_id", busy_channel_id));
+				}
+				qb1.must(busyChannelIdORBuilder);
+			}
 			//商家分类
 			if(StringUtils.isNotBlank(body.getCate_id())){
 				List<String> cate_ids = Arrays.asList(body.getCate_id().split(" "));
