@@ -6,7 +6,6 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class KeySerchBuider {
-	
 	/**
 	 * 关键字搜索
 	 * @param key

@@ -5,7 +5,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 
 public class ShopSerchModel extends BaseSerchModel {
 	private String location;
-	private Integer distance_max = 1000;//多少米内
+	private Integer distance_max = 999999999;//多少米内
 	private String cate_id;
 	private String busy_id;
 	private String main_business_category_channel_id;
