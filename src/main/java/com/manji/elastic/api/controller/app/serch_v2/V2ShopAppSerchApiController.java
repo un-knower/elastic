@@ -166,6 +166,7 @@ public class V2ShopAppSerchApiController {
 			}
 			requestBuider.setFrom((body.getPageNum() - 1) * body.getSize()).setSize(body.getSize());
 			logger.info("参数json:{}",requestBuider.toString());
+
 			//执行查询结果
 			SearchResponse searchResponse = requestBuider.get();
 			SearchHits hits = searchResponse.getHits();
@@ -174,6 +175,14 @@ public class V2ShopAppSerchApiController {
 			int end =body.getPageNum()* body.getSize();
 			int signCount = (int) hits.getTotalHits();
 			if(end > signCount){
+				if(StringUtils.isNotBlank(lat) && StringUtils.isNotBlank(lon)) {
+					//搜索附近区域
+					QueryBuilder builder = QueryBuilders.geoDistanceQuery("latlng")
+							.distance("1000000000m")
+							.point(Double.valueOf(lat), Double.valueOf(lon))
+							.geoDistance(GeoDistance.ARC);
+					qb1.filter(builder);
+				}
 				//构造查询抓取商家的查询条件
 				SearchRequestBuilder requestBuiderExtra = client.prepareSearch(Configure.getES_shop_extra_IndexAlias()).setTypes("info");
 				requestBuiderExtra.setSearchType(SearchType.QUERY_THEN_FETCH);
